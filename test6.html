@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SSC CHSL Tier-I Mathematics Practice Test</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+
+    <style>
+        /* BASE & TYPOGRAPHY */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f0f2f5; 
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- LANDING PAGE AND ADMIN PANEL (ORIGINAL LOOK) --- */
+        .header { text-align:center;background:#fff;padding:40px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);margin-top:20px; border-top:5px solid #e74c3c; }
+        .govt-logo{width:80px;height:80px;background:#e74c3c;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold;}
+        .header h1{color:#2c3e50;margin-bottom:10px;font-size:2.4em;font-weight:bold;text-transform:uppercase;letter-spacing:1px;}
+        .header h2{color:#e74c3c;font-weight:bold;margin-bottom:10px;font-size:1.3em;}
+        .header .subtitle{color:#7f8c8d;font-size:1.1em;margin-bottom:20px;font-style:italic;}
+        .exam-info { background: #f8f9fa; padding: 25px 30px; border-radius: 12px; margin: 20px 0; border-left: 6px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2); max-width: 100%; text-align: left; font-size: 16px; line-height: 1.6; color: #2c3e50; }
+        .exam-info h3 { color: #2c3e50; margin-bottom: 15px; font-weight: 700; font-size: 1.5em; text-align: left; }
+        .exam-info ul { list-style: none; padding-left: 20px; margin: 0; }
+        .exam-info li { margin: 8px 0; padding-left: 20px; position: relative; text-align: left; }
+        .exam-info li:before { content: "•"; color: #3498db; font-weight: bold; position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 18px; }
+
+        .btn{background:linear-gradient(45deg,#3498db,#2980b9);color:white;border:none;padding:18px 35px;border-radius:8px;cursor:pointer;font-size:16px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;transition:all 0.3s ease;margin:10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.3);}
+        .btn-admin{background:linear-gradient(45deg,#e74c3c,#c0392b);}
+        
+        /* GENERAL UTILITIES */
+        .modal { display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);backdrop-filter:blur(5px);}
+        .modal-content { background-color:#fff;margin:10% auto;padding:40px;border-radius:12px;width:90%;max-width:500px;box-shadow:0 10px 40px rgba(0,0,0,0.3);border-top:5px solid #e74c3c;}
+        .modal h3{margin-bottom:25px;color:#2c3e50;font-size:1.5em;}
+        .modal input{width:100%;padding:15px;margin:15px 0;border:2px solid #ddd;border-radius:6px;font-size:16px;}
+        .close{color:#aaa;float:right;font-size:32px;font-weight:bold;cursor:pointer;margin-top:-15px;}
+        .close:hover{color:#e74c3c;}
+        .error-message{background:#f8d7da;color:#721c24;padding:15px;border-radius:8px;text-align:center;margin-top:10px;border:1px solid #f5c6cb;}
+        .admin-panel{display:none;background:#fff;padding:40px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);border-top:5px solid #e74c3c;}
+        .response-table{border-collapse:collapse;margin-top:20px;font-size:14px; width: 100%;}
+        .response-table th, .response-table td{border:1px solid #ddd;padding:12px;text-align:left;}
+        .response-table th{background:linear-gradient(45deg,#2c3e50,#34495e);color:white;font-weight:bold;}
+        .response-table tr:nth-child(even){background-color:#f9f9f9;}
+        /* END OF LANDING PAGE STYLES */
+
+
+        /* === NEW SSC EXAM INTERFACE STYLES === */
+
+        .quiz-container {
+            display: none;
+            background: #f0f2f5; 
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 98vh; 
+        }
+
+        /* Top Header Bar */
+        .exam-header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #f39c12; 
+        }
+        .exam-title { font-size: 1.1em; font-weight: bold; }
+
+        /* Timer Block */
+        .timer-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .timer-container {
+            background: #34495e;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 1em;
+            text-align: center;
+            border: 2px solid #e74c3c;
+        }
+        .timer-display { font-size: 1.2em; font-weight: bold; }
+        .timer-warning { background: #e74c3c !important; color: white !important; border-color: #f39c12 !important; animation: pulse 1s infinite; }
+        .timer-critical { background: #dc3545 !important; animation: flash 0.5s infinite; }
+        @keyframes pulse{0%{opacity:1;}50%{opacity:0.8;}100%{opacity:1;}}
+        @keyframes flash{0%{opacity:1;}50%{opacity:0.5;}100%{opacity:1;}}
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none; 
+            background: none;
+            border: 1px solid white;
+            color: white;
+            font-size: 24px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Main Test Layout */
+        #quizInterface {
+            display: flex;
+            flex-direction: row; 
+            height: calc(100vh - 70px); 
+        }
+
+        /* Left Panel: Questions and Controls */
+        .main-quiz-panel {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-right: 1px solid #ddd;
+        }
+        #questionsContainer {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto; 
+            display: none; /* Hidden until quiz starts */
+        }
+        /* Sign-in Form Styles (Center Aligned) */
+        .user-form {
+            background: #ecf0f1; 
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; 
+        }
+        .user-form h3 { font-size: 1.5em; margin-bottom: 30px; color: #2c3e50; }
+        .user-form input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 300px;
+        }
+        .profile-mockup {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            background: #bdc3c7;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #7f8c8d;
+        }
+        
+        /* Question Card */
+        .question-container {
+            border: none;
+            padding: 0;
+            display: none; 
+        }
+        .question-container.active {
+            display: block; 
+        }
+        .question {
+            background: white;
+            border: 1px solid #bdc3c7; 
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .question-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f39c12;
+            display: block; 
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        .options { list-style: none; }
+        .option {
+            margin-bottom: 10px;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            background: #f8f8f8;
+            cursor: pointer;
+        }
+        .option:hover { background: #e6e6e6; border-color: #999; }
+        .option.selected {
+            background: #007bff; 
+            border-color: #007bff;
+            color: white;
+            font-weight: 500;
+        }
+        .option input[type="radio"] { display: none; }
+        .option label::before {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+            background: white;
+        }
+        .option.selected label::before { background: white; border-color: white; box-shadow: 0 0 0 4px #007bff; }
+        .option.selected label { color: white; }
+        
+        /* Navigation Bar (Fixed Bottom on Mobile) */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #34495e; 
+            color: white;
+            border-top: 1px solid #2c3e50;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .progress { font-size: 1em; font-weight: bold; color: white; }
+        .btn-nav { padding: 10px 15px; font-size: 14px; background: #28a745; }
+        #submitBtn { background: #dc3545 !important; }
+
+        /* Right Panel: Question Palette */
+        #palettePanel {
+            width: 250px;
+            min-width: 250px;
+            background: #ecf0f1; 
+            border-left: 1px solid #ddd;
+            padding: 15px;
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 20px;
+            overflow-y: auto;
+        }
+        .palette-header { font-size: 1.1em; font-weight: bold; margin-bottom: 15px; color: #333; text-decoration: underline; }
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; }
+        .palette-item {
+            width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
+            border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; border: 1px solid #ccc;
+        }
+        /* Palette Colors */
+        .palette-default { background: #fff; color: #333; border: 1px solid #999; } 
+        .palette-answered { background: #28a745; color: white; border-color: #28a745; } 
+        .palette-unanswered { background: #e74c3c; color: white; border-color: #e74c3c; } 
+        .palette-current { background: #f39c12; color: white; border-color: #f39c12; box-shadow: 0 0 5px #f39c12; } 
+
+        /* === RESPONSIVENESS === */
+        
+        @media (max-width: 900px) {
+            /* Mobile Portrait: Hide palette, show toggle button */
+            #palettePanel { display: none; }
+            .main-quiz-panel { width: 100%; }
+            .menu-toggle { display: inline-block; } 
+            .user-form { height: 100vh; }
+
+            /* Navigation and main panel stacking */
+            .main-quiz-panel {
+                order: 2;
+                padding-bottom: 60px; 
+            }
+            .navigation {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 10;
+                padding: 8px 10px;
+            }
+            .progress { display: none; }
+            
+            /* Mobile Landscape: Show palette as sidebar */
+            @media (orientation: landscape) {
+                #quizInterface { flex-direction: row; height: calc(100vh - 70px); }
+                #palettePanel {
+                    display: flex; 
+                    width: 200px;
+                    min-width: 200px;
+                    order: 2;
+                    height: 100%;
+                }
+                .main-quiz-panel {
+                    width: calc(100% - 200px);
+                    order: 1;
+                }
+                .menu-toggle { display: none; }
+            }
+
+            /* Mobile Portrait: Palette Overlay */
+            @media (orientation: portrait) {
+                 #palettePanel.visible {
+                    display: flex;
+                    position: fixed;
+                    top: 55px; 
+                    right: 0;
+                    height: calc(100% - 115px); 
+                    z-index: 9;
+                    background: #f8f8f8;
+                    width: 80%;
+                    box-shadow: -3px 0 8px rgba(0,0,0,0.2);
+                }
+            }
+        }
+
+        /* ADMIN PANEL ENHANCEMENTS */
+        .response-report {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Column Toggle Bar Styling */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+            background: #f8f8f8; /* Light background for the bar */
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .toolbar label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #34495e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .toolbar input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        /* Hide the print button in the toolbar on the main page */
+        .toolbar .print-btn {
+            display: none; 
+        }
+
+        
+        /* DECORATED RESULT SUMMARY */
+        .summary-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .summary-details p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 200;
+            padding: 5px 0;
+            border-left: 3px solid #3498db; 
+            padding-left: 10px;
+        }
+        .summary-details strong {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .test-title {
+            color: #e74c3c;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            padding-bottom: 5px;
+            border-bottom: 2px dashed #e74c3c;
+        }
+        /* Status Coloring for better visual reports */
+        .summary-details p:nth-child(4) strong { color: #002290;  } /* Score */
+        .summary-details p:nth-child(5) strong { color: #28a745; } /* Percentage */
+        .summary-details p:nth-child(6) strong { color: #28a745; } /* Correct */
+        .summary-details p:nth-child(7) strong { color: #e74c3c; } /* Incorrect */
+        .summary-details p:nth-child(8) strong { color: #f39c12; } /* Unattempted */
+
+        /* Hidden columns CSS for toggling */
+        .response-table .hidden,
+        .response-table th.hidden {
+            display: none !important;
+        }
+        
+        /* --- PRINT MEDIA QUERIES (Simple and Robust) --- */
+        @media print {
+            /* Hide all admin panel buttons and controls */
+            .admin-panel > div:not(#responsesContainer) { display: none !important; }
+            .admin-panel > h2 { display: none !important; }
+
+            /* Hide the container buttons above the responses (Download/Clear buttons) */
+            .admin-panel > div:first-child { display: none !important; }
+
+            /* Hide the toolbar for column toggling */
+            .toolbar { display: none !important; }
+            
+            /* Ensure the responses container is visible */
+            #responsesContainer { display: block !important; padding: 0; margin: 0; }
+            
+            /* Remove any decorative background/shadows for clean print */
+            .response-report {
+                border: none;
+                box-shadow: none;
+                page-break-after: always; /* Ensure reports don't overlap */
+            }
+            .summary-details {
+                background: #fff;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+
+            /* Ensure MathJax elements print correctly */
+            .math-question * {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="landingPage">
+            <div class="header">
+                <div class="govt-logo" style="background:#dc3545;border-radius:0;">SSC</div>
+                <h1>Staff Selection Commission</h1>
+                <h2>Random Test 1</h2>
+                <p class="subtitle">Combined Higher Secondary Level Examination</p>
+                <div class="exam-info">
+                    <h3>Examination Instructions:</h3>
+                    <ul>
+                        <li>Total Questions: 45</li>
+                        <li>Maximum Marks: 90</li>
+                        <li>Time Duration: <strong>1 hr 15 Minutes</strong></li>
+                        <li><strong style="color: #dc3545;">⚠️ Test will auto-submit when time expires</strong></li>
+                        <li>Marking Scheme: +2 for correct, -0.5 for incorrect, 0 for unattempted</li>
+                        <li>Do not refresh the page during exam</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="startTest()">Start Examination</button>
+                <button class="btn btn-admin" onclick="openAdminModal()">Open Admin Panel</button>
+            </div>
+        </div>
+
+        <div id="quizContainer" class="quiz-container">
+            <div class="exam-header">
+                <div class="exam-title">SSC CHSL - Mathematics Practice Test</div>
+                <div class="timer-group">
+                    <button class="menu-toggle" onclick="togglePalette()">☰</button>
+                    <div class="timer-container" id="timerContainer">
+                        <div class="timer-label">TIME REMAINING</div>
+                        <div class="timer-display" id="timerDisplay">01:15:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizInterface">
+                <div class="main-quiz-panel">
+                    
+                    <div id="userForm" class="user-form">
+                        <div class="profile-mockup">
+                            <div class="profile-pic">👤</div>
+                            <h3 style="color:#2c3e50;">Enter Candidate Name</h3>
+                        </div>
+                        <input type="text" id="userName" placeholder="Enter your Name" required>
+                        <button class="btn" onclick="startQuiz()" style="background:#28a745; width:80%; max-width: 300px; margin-top: 25px;">Begin Examination</button>
+                    </div>
+
+                    <div id="autoSubmitWarning" class="auto-submit-warning" style="display: none;">
+                        ⚠️ WARNING: Test will be automatically submitted in less than 2 minutes!
+                    </div>
+
+                    <div id="questionsContainer"></div>
+
+                    <div class="navigation" id="navigation" style="display: none;">
+                        <button class="btn-nav" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                        <div class="progress" id="progress">Question 1 of 13</div>
+                        <button class="btn-nav" id="nextBtn" onclick="nextQuestion()">Next</button>
+                        <button class="btn-nav" id="submitBtn" onclick="submitTest()" style="display: none;">Submit Test</button>
+                    </div>
+                </div>
+
+                <div id="palettePanel" class="question-palette">
+                    <div class="palette-header">Question Palette</div>
+                    <div class="palette-grid" id="paletteGrid">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="adminPanel" class="admin-panel">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">Admin Panel - User Responses</h2>
+            <div style="margin-bottom: 20px;">
+                <button class="btn" onclick="downloadRawDataCSV()" style="background: #3498db;">Download Raw Data (CSV)</button>
+                <button class="btn" onclick="downloadResultsCSV()" style="background: #27ae60;">Download Final Results (CSV)</button>
+                <button class="btn" onclick="clearAllResponses()" style="background: #e74c3c;">Clear All Data</button>
+                <button class="btn" onclick="goHome()">Back to Home</button>
+                <button class="btn" onclick="printReport()" style="background: #f39c12;">Print Report</button> 
+            </div>
+            <div id="responsesContainer">
+                <p>No responses yet.</p>
+            </div>
+            <div style="margin-top:12px;color:#666;font-size:13px;">
+                <strong>Note:</strong> Data is stored in JSONBin.
+            </div>
+        </div>
+        
+        <div id="successMessage" style="display: none;" class="success-message">
+            <h3>✅ Test Submitted Successfully!</h3>
+            <p>Your responses have been recorded successfully. <br>You can check your score on the admin panel.</p>
+            <button class="btn" onclick="goHome()" style="margin-top: 20px; background: white; color: #2c3e50;">Back to Home</button>
+        </div>
+    </div>
+
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('passwordModal')">&times;</span>
+            <h3 id="modalTitle">Enter Test PIN</h3>
+            <input type="password" id="testPinInput" placeholder="Enter 6-Digit PIN" maxlength="6">
+            <div id="pinError" class="error-message" style="display: none;">Incorrect 6-Digit PIN!</div>
+            <button class="btn" id="pinSubmitBtn" onclick="checkTestPin()">Start Test</button>
+        </div>
+    </div>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('adminModal')">&times;</span>
+            <h3>Admin Access</h3>
+            <input type="password" id="adminPassword" placeholder="Enter admin password">
+            <div id="passwordError" class="error-message" style="display: none;">Incorrect password!</div>
+            <button class="btn" onclick="checkAdminPassword()">Login</button>
+        </div>
+    </div>
+
+   <script>
+        /************************
+         * JSONBin configuration
+         ************************/
+        const JSONBIN_ID = '68d903e243b1c97be952d590';
+        const JSONBIN_MASTER_KEY = '$2a$10$XZzc.4ipvMjGFeEh9J/7cuffWTZGYXoXCkJjMDjZ1wCgz.BGJ3Cse';
+        const JSONBIN_BASE = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+        const TEST_PIN = '228744'; 
+        const SAVE_INTERVAL_SECONDS = 10;
+        const TOTAL_EXAM_TIME = 75 * 60; 
+        const CRITICAL_TIME_THRESHOLD = 15 * 60; 
+        
+       
+        // Questions data 
+        const questions = 
+            
+            [
+
+  {
+    "question": "A person sells an article at a profit of $12\\%$. If he had purchased it for $12\\%$ less and sold it for $\\text{Rs. }9$ less, he would have gained $27\\%$. What is the original cost price of the article?",
+    "options": [
+      "$\\text{Rs. }4,000$",
+      "$\\text{Rs. }3,750$",
+      "$\\text{Rs. }3,600$",
+      "$\\text{Rs. }4,200$"
+    ],
+    "correct": 1,
+    "ques_no": 1,
+    "chapter": "Profit and Loss (SSC CHSL 2024 Tier-1)",
+    "solution": "Let the original $\\text{CP}$ be $x$.\\r\\nOriginal $\\text{SP} = x \\times \\frac{112}{100} = 1.12x$.\r\nNew $\\text{CP} = x \\times \\frac{88}{100} = 0.88x$.\r\nNew $\\text{SP} = \\text{Original } \\text{SP} - 9 = 1.12x - 9$.\r\nNew Profit $\\% = 27\\%$. $\\implies \\text{New } \\text{SP} = \\text{New } \\text{CP} \\times \\frac{100+27}{100}$.\r\n$1.12x - 9 = 0.88x \\times 1.27$\r\n$1.12x - 9 = 1.1176x$.\r\n$1.12x - 1.1176x = 9$.\r\n$0.0024x = 9$.\r\n$x = \\frac{9}{0.0024} = \\frac{90000}{24} = \\mathbf{3,750\\text{ Rs.}}$.\r\n\\textbf{Ans. (b): } $\\mathbf{\\text{Rs. }3,750}$"
+  },
+  {
+    "question": "A, B, and C start a business. A invests $\\text{Rs. }2,000$ for $12\\text{ months}$, B invests $\\text{Rs. }3,000$ for $8\\text{ months}$, and C invests $\\text{Rs. }4,000$ for $6\\text{ months}$. If the total profit at the end of the year is $\\text{Rs. }6,000$, what is B's share of the profit?",
+    "options": [
+      "$\\text{Rs. }2,500$",
+      "$\\text{Rs. }1,800$",
+      "$\\text{Rs. }2,000$",
+      "$\\text{Rs. }2,250$"
+    ],
+    "correct": 2,
+    "ques_no": 2,
+    "chapter": "Partnership",
+    "solution": "Profit is shared in the ratio of the product of (Investment $\\times$ Time).\r\nCapital-Time Ratio ($A:B:C$):\r\n$A = 2000 \\times 12 = 24,000$\r\n$B = 3000 \\times 8 = 24,000$\r\n$C = 4000 \\times 6 = 24,000$\r\nRatio of profits $= 24,000 : 24,000 : 24,000 = 1:1:1$.\r\nTotal profit units $= 1+1+1 = 3$ units.\r\nTotal profit $= 6,500\\text{ Rs.}$.\r\n$3 \\text{ units} = 6,500\\text{ Rs.}$. (Note: Since 6500 is not divisible by 3, the intended total profit for this ratio was likely $\\text{Rs. }6,000$ or $\\text{Rs. }7,500$. We will assume the intended profit was $\\text{Rs. }6,000$ to match a clean integer option, $2000$).\r\n**Re-solving with $\\text{Total Profit} = \\text{Rs. }6,000$ for integer option:**\r\nB's share $= \\frac{1}{3} \\times 6000 = \\mathbf{2,000\\text{ Rs.}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{\\text{Rs. }2,000}$"
+  },
+  {
+    "question": "A cylindrical vessel with radius $6\\text{ cm}$ and height $5\\text{ cm}$ is to be made by melting a number of spherical metal balls of diameter $2\\text{ cm}$. What is the minimum number of balls needed?",
+    "options": [
+      "$125$",
+      "$135$",
+      "$115$",
+      "$105$"
+    ],
+    "correct": 1,
+    "ques_no": 3,
+    "chapter": "Mensuration 3D",
+    "solution": "Let $N$ be the number of spherical balls.\r\nVolume of Cylinder = $N \\times$ Volume of one Sphere\r\nGiven: $R_C = 6\\text{ cm}$, $h_C = 5\\text{ cm}$. $d_S = 2\\text{ cm} \\implies R_S = 1\\text{ cm}$.\r\n$\\pi R_C^2 h_C = N \\times \\frac{4}{3}\\pi R_S^3$\r\n$(6)^2 \\times 5 = N \\times \\frac{4}{3} (1)^3$\r\n$36 \\times 5 = N \\times \\frac{4}{3}$\r\n$180 = N \\times \\frac{4}{3}$\r\n$N = 180 \\times \\frac{3}{4} = 45 \\times 3 = \\mathbf{135}$.\r\n\\textbf{Ans. (b): } $\\mathbf{135}$"
+  },
+  {
+    "question": "The perimeter of an isosceles triangle is $125\\text{ cm}$. If the base is $33\\text{ cm}$, find the length of the equal sides (in $\\text{cm}$).",
+    "options": [
+      "$42\\text{ cm}$",
+      "$34\\text{ cm}$",
+      "$46\\text{ cm}$",
+      "$32\\text{ cm}$"
+    ],
+    "correct": 2,
+    "ques_no": 4,
+    "chapter": "Mensuration 2D",
+    "solution": "Let the length of the equal sides be $a$.\r\nPerimeter $= 2a + \\text{Base}$.\r\n$125 = 2a + 33$.\r\n$2a = 125 - 33$.\r\n$2a = 92$.\r\n$a = \\frac{92}{2} = \\mathbf{46\\text{ cm}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{46\\text{ cm}}$"
+  },
+  {
+    "question": "If $a^2 + b^2 = 13$ and $a + b = 5$, then the value of $a^3 + b^3$ is:",
+    "options": [
+      "$35$",
+      "$32$",
+      "$30$",
+      "$34$"
+    ],
+    "correct": 0,
+    "ques_no": 5,
+    "chapter": "Algebra",
+    "solution": "We use: $a^3 + b^3 = (a+b)(a^2 + b^2 - ab)$.\r\nFirst, find $ab$: $2ab = (a+b)^2 - (a^2+b^2)$.\r\n$2ab = (5)^2 - 13 = 25 - 13 = 12$. $\\implies ab = 6$.\r\nNow, $a^3 + b^3 = (5)(13 - 6)$.\r\n$a^3 + b^3 = 5 \\times 7 = \\mathbf{35}$.\r\n\\textbf{Ans. (a): } $\\mathbf{35}$"
+  },
+  {
+    "question": "If the area of an equilateral triangle is $16\\sqrt{3}\\text{ cm}^2$, what is the length of its altitude (in $\\text{cm}$)?",
+    "options": [
+      "$6\\sqrt{3}\\text{ cm}$",
+      "$4\\sqrt{3}\\text{ cm}$",
+      "$8\\text{ cm}$",
+      "$12\\text{ cm}$"
+    ],
+    "correct": 1,
+    "ques_no": 6,
+    "chapter": "Geometry",
+    "solution": "Formula for the area of an equilateral triangle: $A = \\frac{\\sqrt{3}}{4} a^2$.\r\n$16\\sqrt{3} = \\frac{\\sqrt{3}}{4} a^2$. $\\implies a^2 = 16 \\times 4 = 64$. $\\implies \\text{Side } a = 8\\text{ cm}$.\r\nFormula for the altitude ($h$) of an equilateral triangle: $h = \\frac{\\sqrt{3}}{2} a$.\r\n$h = \\frac{\\sqrt{3}}{2} \\times 8 = \\mathbf{4\\sqrt{3}\\text{ cm}}$.\r\n\\textbf{Ans. (b): } $\\mathbf{4\\sqrt{3}\\text{ cm}}$"
+  },
+  {
+    "question": "A wire is bent to form a square of area $484\\text{ cm}^2$. If the same wire is bent into the shape of a circle, what is the area enclosed by the circle (in $\\text{cm}^2$)? (Take $\\pi = \\frac{22}{7}$)",
+    "options": [
+      "$550\\text{ cm}^2$",
+      "$616\\text{ cm}^2$",
+      "$512\\text{ cm}^2$",
+      "$484\\text{ cm}^2$"
+    ],
+    "correct": 1,
+    "ques_no": 7,
+    "chapter": "Mensuration 2D",
+    "solution": "Area of Square ($A_s$) $= a^2 = 484\\text{ cm}^2$. $\\implies \\text{Side } a = 22\\text{ cm}$.\r\nPerimeter of Square ($P_s$) $= 4a = 4 \\times 22 = 88\\text{ cm}$.\r\nCircumference of Circle ($C$) $= P_s = 88\\text{ cm}$.\r\n$2\\pi r = 88$.\r\n$2 \\times \\frac{22}{7} \\times r = 88$.\r\n$r = \\frac{88 \\times 7}{44} = 14\\text{ cm}$.\r\nArea of Circle ($A_c$) $= \\pi r^2 = \\frac{22}{7} \\times 14 \\times 14$.\r\n$A_c = 22 \\times 2 \\times 14 = \\mathbf{616\\text{ cm}^2}$.\r\n\\textbf{Ans. (b): } $\\mathbf{616\\text{ cm}^2}$"
+  },
+  {
+    "question": "A man and a woman, working together, can do a work in $66$ days. The ratio of their working efficiencies is $3:2$. In how many days $6$ men and $2$ women working together can complete the same work?",
+    "options": [
+      "$18\\text{ days}$",
+      "$15\\text{ days}$",
+      "$14\\text{ days}$",
+      "$12\\text{ days}$"
+    ],
+    "correct": 1,
+    "ques_no": 8,
+    "chapter": "Time and Work",
+    "solution": "This problem is solved by establishing the efficiency ratio and calculating the total work.\r\n\r\n**Step 1: Determine Individual and Combined Efficiency**\r\n* Efficiency Ratio (Man : Woman) = $3 : 2$.\r\n* Let Man's efficiency ($E_M$) be $3$ units/day and Woman's efficiency ($E_W$) be $2$ units/day.\r\n* Combined efficiency of $(1\\text{ Man} + 1\\text{ Woman}) = 3 + 2 = 5$ units/day.\r\n\r\n**Step 2: Calculate Total Work**\r\nThe man and woman together complete the work in $66$ days.\r\n* Total Work = Efficiency \\times Time = $5 \\times 66 = \\mathbf{330}$ units.\r\n\r\n**Step 3: Calculate the New Team's Efficiency**\r\nThe new team consists of $6$ men and $2$ women.\r\n* Efficiency of $6\\text{ Men} = 6 \\times 3 = 18$ units/day.\r\n* Efficiency of $2\\text{ Women} = 2 \\times 2 = 4$ units/day.\r\n* New Team's Efficiency ($E_{\\text{New}}$) = $18 + 4 = \\mathbf{22}$ units/day.\r\n\r\n**Step 4: Calculate Time Taken by the New Team**\r\nTime = $\\frac{\\text{Total Work}}{\\text{New Team's Efficiency}}$\r\n* Time = $\\frac{330}{22} = \\mathbf{15}$ days.\r\n\\textbf{Ans. (b): } $\\mathbf{15\\text{ days}}$"
+  },
+  {
+    "question": "The Simple Interest on a certain sum for $3\\text{ years}$ at $12\\%$ per annum is $\\text{Rs. }6,750$. What will be the Simple Interest on the same sum for $5\\text{ years}$ at $9\\%$ per annum?",
+    "options": [
+      "$\\text{Rs. }8,437.50$",
+      "$\\text{Rs. }9,200.50$",
+      "$\\text{Rs. }7,800.00$",
+      "$\\text{Rs. }6,500.00$"
+    ],
+    "correct": 0,
+    "ques_no": 9,
+    "chapter": "Simple Intrest",
+    "solution": "The interest is proportional to the product of Rate and Time ($R \\times T$).\r\nCase 1: $R_1 \\times T_1 = 12\\% \\times 3 = 36\\%$. $SI_1 = 6,750\\text{ Rs.}$.\r\nCase 2: $R_2 \\times T_2 = 9\\% \\times 5 = 45\\%$. $SI_2 = \\text{?}$\r\nWe use the ratio: $\\frac{SI_1}{SI_2} = \\frac{R_1 T_1}{R_2 T_2}$.\r\n$\\frac{6,750}{SI_2} = \\frac{36}{45} = \\frac{4}{5}$.\r\n$SI_2 = 6,750 \\times \\frac{5}{4}$.\r\n$SI_2 = 1,687.50 \\times 5 = \\mathbf{8,437.50\\text{ Rs.}}$.\r\n\\textbf{Ans. (a): } $\\mathbf{\\text{Rs. }8,437.50}$"
+  },
+  {
+    "question": "The diameter of the wheel of a car is $140\\text{ cm}$. How many revolutions per minute must the wheel make in order to keep a speed of $66\\text{ km/hr}$? (Take $\\pi = \\frac{22}{7}$)",
+    "options": [
+      "$250$",
+      "$200$",
+      "$225$",
+      "$300$"
+    ],
+    "correct": 0,
+    "ques_no": 10,
+    "chapter": "Mensuration 2D",
+    "solution": "1. Distance covered in one revolution = Circumference of wheel ($C$): $C = \\pi d = \\frac{22}{7} \\times 140 = 22 \\times 20 = 440\\text{ cm}$.\r\n2. Speed of car ($S$): $66\\text{ km/hr}$. Convert to $\\text{cm/min}$: $66 \\times \\frac{1000\\text{ m}}{1\\text{ km}} \\times \\frac{100\\text{ cm}}{1\\text{ m}} \\times \\frac{1\\text{ hr}}{60\\text{ min}}$.\r\n$S = \\frac{66 \\times 100000}{60} = 110000\\text{ cm/min}$.\r\n3. Number of revolutions per minute ($N$): $N = \\frac{\\text{Speed in } \\text{cm/min}}{\\text{Circumference in } \\text{cm}}$.\r\n$N = \\frac{110000}{440} = \\frac{11000}{44} = \\mathbf{250}$.\r\n\\textbf{Ans. (a): } $\\mathbf{250}$"
+  },
+  {
+    "question": "The HCF and LCM of two numbers are $24$ and $360$, respectively. If one of the numbers is $72$, the other number is:",
+    "options": [
+      "$120$",
+      "$108$",
+      "$144$",
+      "$96$"
+    ],
+    "correct": 0,
+    "ques_no": 11,
+    "chapter": "Number System",
+    "solution": "We use the fundamental formula: $\\text{First Number} \\times \\text{Second Number} = \\text{HCF} \\times \\text{LCM}$.\r\nLet the first number be $N_1 = 72$ and the second number be $N_2$.\r\n$N_1 \\times N_2 = HCF \\times LCM$.\r\n$72 \\times N_2 = 24 \\times 360$.\r\n$N_2 = \\frac{24 \\times 360}{72}$.\r\n$N_2 = \\frac{1}{3} \\times 360 = \\mathbf{120}$.\r\n\\textbf{Ans. (a): } $\\mathbf{120}$"
+  },
+  {
+    "question": "If $x = 11$, then the value of $x^5 - 12x^4 + 12x^3 - 12x^2 + 12x - 1$ is:",
+    "options": [
+      "$11$",
+      "$10$",
+      "$-1$",
+      "$-10$"
+    ],
+    "correct": 3,
+    "ques_no": 12,
+    "chapter": "Algebra",
+    "solution": "Given $x=11$, so $12 = x+1$. Substitute $x+1$ for $12$ in the expression:\r\n$\text{Expression} = x^5 - (x+1)x^4 + (x+1)x^3 - (x+1)x^2 + (x+1)x - 1$.\r\n$\text{Expression} = x^5 - (x^5 + x^4) + (x^4 + x^3) - (x^3 + x^2) + (x^2 + x) - 1$.\r\n$\text{Expression} = x^5 - x^5 - x^4 + x^4 + x^3 - x^3 - x^2 + x^2 + x - 1$.\r\nAll terms cancel out except the last two:\r\n$\text{Expression} = x - 1$.\r\nSubstitute $x=11$: $11 - 1 = \\mathbf{10}$.\r\n\\textbf{Ans. (b): } $\\mathbf{10}$"
+  },
+  {
+    "question": "A fruit seller bought $480$ bananas for $\\text{Rs. }1,200$. He threw away $20\\%$ of the bananas because they were rotten. He sells the remaining bananas at $\\text{Rs. }4$ each. What is his overall profit percentage?",
+    "options": [
+      "$25\\%$",
+      "$28\\%$",
+      "$30\\%$",
+      "$33\\%$"
+    ],
+    "correct": 1,
+    "ques_no": 13,
+    "chapter": "Profit and Loss",
+    "solution": "Total CP $= 1200\\text{ Rs.}$.\r\nTotal bananas $= 480$.\r\nBananas thrown away $= 20\\%$ of $480 = 96$.\r\nRemaining bananas $= 480 - 96 = 384$.\r\nTotal SP $= 384 \\times 4 = 1536\\text{ Rs.}$.\r\nOverall Profit $= SP - CP = 1536 - 1200 = 336\\text{ Rs.}$.\r\nProfit $\\% = \\frac{\\text{Profit}}{CP} \\times 100 = \\frac{336}{1200} \\times 100$.\r\nProfit $\\% = \\frac{336}{12} = \\mathbf{28\\%}$.\r\n\\textbf{Ans. (b): } $\\mathbf{28\\%}$"
+  },
+  {
+    "question": "A sum of $\\text{Rs. }4,000$ is invested at $10\\%$ per annum Compound Interest (CI), compounded annually. What is the CI after $3\\text{ years}$?",
+    "options": [
+      "$\\text{Rs. }1,324$",
+      "$\\text{Rs. }1,300$",
+      "$\\text{Rs. }1,280$",
+      "$\\text{Rs. }1,400$"
+    ],
+    "correct": 0,
+    "ques_no": 14,
+    "chapter": "Compound Intrest",
+    "solution": "Principal ($P$) $= 4,000\\text{ Rs.}$, Rate ($R$) $= 10\\%$, Time ($T$) $= 3\\text{ years}$.\r\nEffective CI rate for $3$ years at $10\\%$ is: $10 + 10 + \\frac{10 \\times 10}{100} = 21\\%$ (for $2\\text{ years}$).\r\nFor $3\\text{ years}$: $21 + 10 + \\frac{21 \\times 10}{100} = 31 + 2.1 = 33.1\\%$.\r\nCompound Interest ($CI$) $= P \\times \\text{Effective Rate}$.\r\n$CI = 4000 \\times 33.1\\%$.\r\n$CI = 4000 \\times \\frac{33.1}{100} = 40 \\times 33.1 = \\mathbf{1,324\\text{ Rs.}}$.\r\n\\textbf{Ans. (a): } $\\mathbf{\\text{Rs. }1,324}$"
+  },
+  {
+    "question": "The base of a triangle is equal to the perimeter of a square whose diagonal is $6\\sqrt{2}\\text{ cm}$. If the height of the triangle is equal to the side of a square whose area is $144\\text{ cm}^2$, find the area of the triangle (in $\\text{cm}^2$).",
+    "options": [
+      "$108\\text{ cm}^2$",
+      "$124\\text{ cm}^2$",
+      "$144\\text{ cm}^2$",
+      "$96\\text{ cm}^2$"
+    ],
+    "correct": 2,
+    "ques_no": 15,
+    "chapter": "Mensuration 2D",
+    "solution": "1. Calculate the base of the triangle ($b$):\r\nDiagonal of square $= a\\sqrt{2} = 6\\sqrt{2}\\text{ cm}$. $\\implies \\text{Side } a = 6\\text{ cm}$.\r\nBase of triangle ($b$) $= \\text{Perimeter of square} = 4a = 4 \\times 6 = 24\\text{ cm}$.\r\n2. Calculate the height of the triangle ($h$):\r\nArea of square $= a_2^2 = 144\\text{ cm}^2$. $\\implies \\text{Side } a_2 = 12\\text{ cm}$.\r\nHeight of triangle ($h$) $= 12\\text{ cm}$.\r\n3. Calculate the area of the triangle ($A_T$):\r\n$A_T = \\frac{1}{2} \\times \\text{Base} \\times \\text{Height} = \\frac{1}{2} \\times 24 \\times 12$.\r\n$A_T = 12 \\times 12 = \\mathbf{144\\text{ cm}^2}$.\r\n\\textbf{Ans. (c): } $\\mathbf{144\\text{ cm}^2}$"
+  },
+  {
+    "question": "The average of $15$ numbers is $45$. If the average of the first eight numbers is $48$, and the average of the last eight numbers is $42$, then the eighth number is:",
+    "options": [
+      "$40$",
+      "$45$",
+      "$48$",
+      "$39$"
+    ],
+    "correct": 1,
+    "ques_no": 16,
+    "chapter": "Average",
+    "solution": "Total sum of $15\\text{ numbers} = 15 \\times 45 = 675$.\r\nSum of first $8\\text{ numbers} = 8 \\times 48 = 384$.\r\nSum of last $8\\text{ numbers} = 8 \\times 42 = 336$.\r\nThe eighth number is calculated as: $(\\text{Sum of first } 8) + (\\text{Sum of last } 8) - (\\text{Sum of all } 15)$.\r\nEighth number $= (384 + 336) - 675$.\r\nEighth number $= 720 - 675 = \\mathbf{45}$.\r\n\\textbf{Ans. (b): } $\\mathbf{45}$"
+  },
+  {
+    "question": "If $a+b+c=9$ and $a^2+b^2+c^2=35$, then the value of $a^3+b^3+c^3 - 3abc$ is:",
+    "options": [
+      "$153$",
+      "$144$",
+      "$108$",
+      "$162$"
+    ],
+    "correct": 2,
+    "ques_no": 17,
+    "chapter": "Algebra",
+    "solution": "We use the identity: $a^3+b^3+c^3 - 3abc = (a+b+c)(a^2+b^2+c^2 - (ab+bc+ca))$.\r\nFirst, find $ab+bc+ca$: $2(ab+bc+ca) = (a+b+c)^2 - (a^2+b^2+c^2)$.\r\n$2(ab+bc+ca) = (9)^2 - 35 = 81 - 35 = 46$. $\\implies ab+bc+ca = 23$.\r\nNow, substitute: $a^3+b^3+c^3 - 3abc = (9)(35 - 23)$.\r\n$a^3+b^3+c^3 - 3abc = 9 \\times 12 = \\mathbf{108}$.\r\n\\textbf{Ans. (c): } $\\mathbf{108}$"
+  },
+  {
+    "question": "If $x^4 + \\frac{1}{x^4} = 194$, and $x > 0$, then the value of $x^3 + \\frac{1}{x^3}$ is:",
+    "options": [
+      "$52$",
+      "$56$",
+      "$60$",
+      "$58$"
+    ],
+    "correct": 0,
+    "ques_no": 18,
+    "chapter": "Algebra",
+    "solution": "First, find $x^2 + \\frac{1}{x^2}$: $x^2 + \\frac{1}{x^2} = \\sqrt{x^4 + \\frac{1}{x^4} + 2}$.\r\n$x^2 + \\frac{1}{x^2} = \\sqrt{194 + 2} = \\sqrt{196} = 14$.\r\nNext, find $x + \\frac{1}{x}$: $x + \\frac{1}{x} = \\sqrt{x^2 + \\frac{1}{x^2} + 2}$.\r\n$x + \\frac{1}{x} = \\sqrt{14 + 2} = \\sqrt{16} = 4$.\r\nFinally, find $x^3 + \\frac{1}{x^3}$: Let $k = 4$.\r\n$x^3 + \\frac{1}{x^3} = k^3 - 3k = (4)^3 - 3(4) = 64 - 12 = \\mathbf{52}$.\r\n\\textbf{Ans. (a): } $\\mathbf{52}$"
+  },
+  {
+    "question": "A and B together can do a piece of work in $30$ days. They worked together for $20$ days and then B left. After another $20$ days, A finished the remaining work. In how many days A alone can finish the entire job?",
+    "options": [
+      "$50\\text{ days}$",
+      "$40\\text{ days}$",
+      "$60\\text{ days}$",
+      "$45\\text{ days}$"
+    ],
+    "correct": 2,
+    "ques_no": 19,
+    "chapter": "Time and Work",
+    "solution": "This problem uses the fractional work concept to determine A's total time.\r\n\r\n**Step 1: Calculate the Work Done Together**\r\n* $A$ and $B$ together complete the work in $30$ days. This means their combined work rate is $\\frac{1}{30}$ of the work per day.\r\n* Work done by $A+B$ in $20$ days $= 20 \\times \\frac{1}{30} = \\frac{2}{3}$ of the total work.\r\n\r\n**Step 2: Calculate the Remaining Work**\r\n* Remaining Work $= 1 - \\frac{2}{3} = \\frac{1}{3}$ of the total work.\r\n\r\n**Step 3: Determine A's Total Time**\r\n* The remaining $\\frac{1}{3}$ of the work was completed by $A$ alone in $20$ days.\r\n* If $A$ completes $\\frac{1}{3}$ work in $20$ days, then $A$ can complete the entire work ($1$ unit) in:\r\n* Time taken by $A$ alone $= 20\\text{ days} \\times \\frac{3}{1} = \\mathbf{60}$ days.\r\n\r\n\\textbf{Ans. (c): } $\\mathbf{60\\text{ days}}$"
+  },
+  {
+    "question": "The difference between the Compound Interest (CI) and the Simple Interest (SI) on a sum of $\\text{Rs. }2,000$ for $2\\text{ years}$ is $\\text{Rs. }12.80$. Find the rate of interest per annum.",
+    "options": [
+      "$10\\%$",
+      "$8\\%$",
+      "$6\\%$",
+      "$5\\%$"
+    ],
+    "correct": 1,
+    "ques_no": 20,
+    "chapter": "Compound Intrest",
+    "solution": "For $2\\text{ years}$, the formula for the difference between CI and SI is: $CI - SI = P \\times \\left( \\frac{R}{100} \\right)^2$.\r\nGiven: $CI - SI = 12.80\\text{ Rs.}$, $P = 2,000\\text{ Rs.}$.\r\n$12.50 = 2000 \\times \\left( \\frac{R}{100} \\right)^2$.\r\n$\\frac{12.50}{2000} = \\frac{R^2}{10000}$.\r\n$R^2 = \\frac{12.80 \\times 10000}{2000} = \\frac{125000}{2000} = \\frac{128}{2}$.\r\n(Note: The calculation gives $R^2=64$.\r\n\\textbf{Ans. (d): } $\\mathbf{8\\%}$"
+  },
+  {
+    "question": "A and B together can complete a piece of work in $12$ days, B and C together can complete it in $18$ days, and A and C together can complete it in $36$ days. In how many days will all of them together complete the work?",
+    "options": [
+      "$15\\text{ days}$",
+      "$10\\text{ days}$",
+      "$12\\text{ days}$",
+      "$16\\text{ days}$"
+    ],
+    "correct": 2,
+    "ques_no": 21,
+    "chapter": "Time and Work",
+    "solution": "We will use the **LCM Method** to find the total work and the combined efficiency of (A + B + C).\r\n\r\n**Step 1: Calculate Total Work and Combined Efficiencies**\r\n* Days for $A+B = 12$ days\r\n* Days for $B+C = 18$ days\r\n* Days for $A+C = 36$ days\r\n* **Total Work** (LCM of $12, 18, 36$) = $\\mathbf{36}$ units.\r\n\r\nCalculate the efficiency (units/day) for each pair:\r\n* Efficiency of $A+B = \\frac{36}{12} = \\mathbf{3}$ units/day\r\n* Efficiency of $B+C = \\frac{36}{18} = \\mathbf{2}$ units/day\r\n* Efficiency of $A+C = \\frac{36}{36} = \\mathbf{1}$ unit/day\r\n\r\n**Step 2: Calculate the Combined Efficiency of (A + B + C)**\r\nSumming the efficiencies gives the total efficiency of $2(A+B+C)$:\r\n* $2(A+B+C) = 3 + 2 + 1 = 6$ units/day\r\n* Efficiency of $A+B+C = \\frac{6}{2} = \\mathbf{3}$ units/day.\r\n\r\n**Step 3: Calculate the Time Taken by A, B, and C Together**\r\nTime = $\\frac{\\text{Total Work}}{\\text{Combined Efficiency}}$\r\n* Time ($A+B+C$) = $\\frac{36}{3} = \\mathbf{12}$ days.\r\n\\textbf{Ans. (c): } $\\mathbf{12\\text{ days}}$"
+  },
+  {
+    "question": "Pipes A and B can fill a tank in $15\\text{ hours}$ and $20\\text{ hours}$, respectively. Pipe C can empty the tank in $10\\text{ hours}$. If all three pipes are opened together, how much time (in hours) will it take to fill the tank?",
+    "options": [
+      "$30\\text{ hours}$",
+      "$45\\text{ hours}$",
+      "$60\\text{ hours}$",
+      "$24\\text{ hours}$"
+    ],
+    "correct": 2,
+    "ques_no": 22,
+    "chapter": "Pipe and Cisten",
+    "solution": "Total work (capacity) $=$ LCM of $15, 20, 10 = 60$ units.\r\nEfficiency of $A$ (filling) $= +\\frac{60}{15} = +4$ units/hour.\r\nEfficiency of $B$ (filling) $= +\\frac{60}{20} = +3$ units/hour.\r\nEfficiency of $C$ (emptying) $= -\\frac{60}{10} = -6$ units/hour.\r\nNet combined efficiency $= 4 + 3 - 6 = +1$ unit/hour (filling).\r\nTime taken to fill the tank $= \\frac{\\text{Total Work}}{\\text{Net Efficiency}}$.\r\nTime $= \\frac{60}{1} = \\mathbf{60\\text{ hours}}$."
+  },
+  {
+    "question": "A sum of money invested at Simple Interest (SI) becomes $\\frac{9}{5}$ times itself in $4\\text{ years}$. Find the rate of interest per annum.",
+    "options": [
+      "$15\\%$",
+      "$18\\%$",
+      "$20\\%$",
+      "$25\\%$"
+    ],
+    "correct": 2,
+    "ques_no": 23,
+    "chapter": "Simple Intrest",
+    "solution": "Let the Principal ($P$) be $5x$. The Amount ($A$) becomes $\\frac{9}{5} \\times 5x = 9x$.\r\nSimple Interest ($SI$) $= A - P = 9x - 5x = 4x$.\r\nWe use the formula: $SI = \\frac{P \\times R \\times T}{100}$.\r\nGiven: $SI = 4x$, $P = 5x$, $T = 4\\text{ years}$.\r\n$4x = \\frac{5x \\times R \\times 4}{100}$.\r\n$4x = \\frac{20x R}{100}$.\r\n$R = \\frac{4x \\times 100}{20x} = \\mathbf{20\\%}$.\r\n\\textbf{Ans. (c): } $\\mathbf{20\\%}$"
+  },
+  {
+    "question": "Two pipes A and B can fill a tank in $18\\text{ minutes}$ and $24\\text{ minutes}$, respectively. If both pipes are opened simultaneously, after how much time (in $\\text{minutes}$) should pipe B be closed so that the tank is full in $12\\text{ minutes}$?",
+    "options": [
+      "$4\\text{ minutes}$",
+      "$6\\text{ minutes}$",
+      "$8\\text{ minutes}$",
+      "$9\\text{ minutes}$"
+    ],
+    "correct": 2,
+    "ques_no": 24,
+    "chapter": "Pipe and Cisten",
+    "solution": "Total work (capacity) $=$ LCM of $18$ and $24 = 72$ units.\r\nEfficiency of $A = \\frac{72}{18} = 4$ units/minute (filling).\r\nEfficiency of $B = \\frac{72}{24} = 3$ units/minute (filling).\r\nPipe A works for the entire time, $12\\text{ minutes}$.\r\nWork done by $A$ in $12\\text{ minutes} = 12 \\times 4 = 48$ units.\r\nRemaining work done by pipe $B = 72 - 48 = 24$ units.\r\nTime pipe $B$ was open $= \\frac{\\text{Work done by } B}{\\text{Efficiency of } B}$.\r\nTime $= \\frac{24}{3} = \\mathbf{8\\text{ minutes}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{8\\text{ minutes}}$"
+  },
+  {
+    "question": "A solid metallic hemisphere of radius $6.3\\text{ cm}$ is melted and recast into a right circular cylinder of radius $9\\text{ cm}$. What is the height of the cylinder (in $\\text{cm}$, correct to one decimal place)?",
+    "options": [
+      "$2.5\\text{ cm}$",
+      "$1.9\\text{ cm}$",
+      "$2.1\\text{ cm}$",
+      "$2.7\\text{ cm}$"
+    ],
+    "correct": 2,
+    "ques_no": 25,
+    "chapter": "Mensuration 3D",
+    "solution": "When a solid is melted and recast, the volume remains constant.\r\nVolume of Hemisphere = Volume of Cylinder\r\n$\\frac{2}{3}\\pi R_H^3 = \\pi R_C^2 h$\r\nGiven: $R_H = 6.3\\text{ cm}$, $R_C = 9\\text{ cm}$.\r\n$\\frac{2}{3} \\times (6.3)^3 = (9)^2 \\times h$\r\n$\\frac{2}{3} \\times 6.3 \\times 6.3 \\times 6.3 = 81 \\times h$\r\n$2 \\times 2.1 \\times 6.3 \\times 6.3 = 81 \\times h$\r\n$16.6698 = 81h$\r\n$h = \\frac{166.698}{81} \\approx 2.058\\text{ cm}$\r\nRounding to one decimal place, $h = \\mathbf{2.1\\text{ cm}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{2.1\\text{ cm}}$"
+  },
+  {
+    "question": "P can do a piece of work in $12$ days. Q can do the same work in $15$ days. They start working together, but P leaves after working for $4$ days. In how many more days will Q finish the remaining work?",
+    "options": [
+      "$6$ days",
+      "$4$ days",
+      "$5$ days",
+      "$8$ days"
+    ],
+    "correct": 0,
+    "ques_no": 26,
+    "chapter": "Time and Work",
+    "solution": "We will use the LCM Method to determine the total work and the daily efficiency of P and Q.\r\n\r\n**Step 1: Calculate Total Work and Efficiencies**\r\nThe total work is the LCM of $12$ and $15$, which is $\\mathbf{60}$ units.\r\nEfficiency of P ($E_P$) = $\\frac{60}{12} = \\mathbf{5}$ units/day.\r\nEfficiency of Q ($E_Q$) = $\\frac{60}{15} = \\mathbf{4}$ units/day.\r\n\r\n**Step 2: Calculate Work Done Together**\r\nP and Q work together for $4$ days.\r\nCombined Efficiency ($E_{P+Q}$) = $5 + 4 = \\mathbf{9}$ units/day.\r\nWork done in $4$ days = $9 \\times 4 = \\mathbf{36}$ units.\r\n\r\n**Step 3: Calculate Remaining Work**\r\nRemaining Work = $60 - 36 = \\mathbf{24}$ units.\r\n\r\n**Step 4: Calculate Time Taken by Q**\r\nAfter P leaves, the remaining work is completed by Q alone.\r\nTime taken by Q ($T_Q$) = $\\frac{\\text{Remaining Work}}{E_Q} = \\frac{24}{4} = \\mathbf{6}$ days.\r\n\\textbf{Ans. (a): } $\\mathbf{6\\text{ days}}$"
+  },
+  {
+    "question": "A can complete a piece of work in $12\\text{ days}$ and B can complete the same work in $18\\text{ days}$. A and B started working together, but A left $4\\text{ days}$ before the completion of the work. For how many days did B work alone?",
+    "options": [
+      "$5\\text{ days}$",
+      "$6\\text{ days}$",
+      "$4\\text{ days}$",
+      "$7\\text{ days}$"
+    ],
+    "correct": 2,
+    "ques_no": 27,
+    "chapter": "Time and Work (SSC CHSL 2023)",
+    "solution": "Total Work $=$ LCM of $12$ and $18 = 36$ units.\r\nEfficiency of $A = \\frac{36}{12} = 3$ units/day.\r\nEfficiency of $B = \\frac{36}{18} = 2$ units/day.\r\nLet $T$ be the total time taken to complete the work.\r\nSince $A$ left $4\\text{ days}$ before completion, $B$ worked alone for the last $4\\text{ days}$.\r\nWork done by $B$ alone in the last $4\\text{ days} = 4 \\times 2 = 8$ units.\r\nRemaining work completed by $A$ and $B$ together $= 36 - 8 = 28$ units.\r\nTime worked together $= \\frac{28}{\\text{Efficiency of } A+B} = \\frac{28}{3+2} = \\frac{28}{5} = 5.6\\text{ days}$.\r\n\r\n$\r\n\\textbf{The question asks for the time B worked alone: } \\mathbf{4\\text{ days}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{4\\text{ days}}$"
+  },
+  {
+    "question": "A and B started a business. B's investment was $2.5$ times A's investment. After $4\\text{ months}$, A doubled his investment. If the total profit at the end of the year was $\\text{Rs. }70,000$, what is A's share of the profit?",
+    "options": [
+      "$\\text{Rs. }25,000$",
+      "$\\text{Rs. }28,000$",
+      "$\\text{Rs. }35,000$",
+      "$\\text{Rs. }40,000$"
+    ],
+    "correct": 1,
+    "ques_no": 28,
+    "chapter": "Partnership",
+    "solution": "Let A's initial investment be $x$. $\\implies$ B's investment is $2.5x$.\r\nTime period $= 12\\text{ months}$.\r\nRatio of profits is (A's Investment $\\times$ Time) : (B's Investment $\\times$ Time).\r\n$A$: $(x \\times 4) + (2x \\times 8) = 4x + 16x = 20x$.\r\n$B$: $(2.5x \\times 12) = 30x$.\r\nProfit Sharing Ratio $A:B = 20x : 30x = 2:3$.\r\nTotal profit units $= 2+3 = 5$ units.\r\nTotal profit $= 70,000\\text{ Rs.}$.\r\n$5 \\text{ units} = 70,000\\text{ Rs.}$. $\\implies 1 \\text{ unit} = 14,000\\text{ Rs.}$.\r\nA's share $= 2 \\text{ units} = 2 \\times 14,000 = \\mathbf{28,000\\text{ Rs.}}$."
+  },
+  {
+    "question": "The average weight of $20$ students in a class is $44\\text{ kg}$. If the weight of the teacher is included, the average weight increases by $1\\text{ kg}$. What is the weight of the teacher (in $\\text{kg}$)?",
+    "options": [
+      "$65\\text{ kg}$",
+      "$68\\text{ kg}$",
+      "$64\\text{ kg}$",
+      "$66\\text{ kg}$"
+    ],
+    "correct": 0,
+    "ques_no": 29,
+    "chapter": "Average",
+    "solution": "Average weight of $20\\text{ students} = 44\\text{ kg}$.\r\nTotal weight of $20\\text{ students} = 20 \\times 44 = 880\\text{ kg}$.\r\nWhen the teacher joins, total number of people $= 20 + 1 = 21$.\r\nNew average weight $= 44 + 1 = 45\\text{ kg}$.\r\nNew total weight of $21\\text{ people} = 21 \\times 45 = 945\\text{ kg}$.\r\nWeight of the teacher $= \\text{New Total Weight} - \\text{Old Total Weight}$.\r\nWeight of the teacher $= 945 - 880 = \\mathbf{65\\text{ kg}}$.\r\n\\textbf{Ans. (a): } $\\mathbf{65\\text{ kg}}$"
+  },
+  {
+    "question": "If the total surface area of a cube is $24\\text{ sq. units}$, then what is the volume of the cube (in $\\text{cu. units}$)?",
+    "options": [
+      "$4\\text{ cu. units}$",
+      "$16\\text{ cu. units}$",
+      "$8\\text{ cu. units}$",
+      "$10\\text{ cu. units}$"
+    ],
+    "correct": 2,
+    "ques_no": 30,
+    "chapter": "Mensuration 3D",
+    "solution": "Let the side of the cube be $a$.\r\nTotal Surface Area (TSA) $= 6a^2$.\r\nGiven: $6a^2 = 24$.\r\n$a^2 = \\frac{24}{6} = 4$.\r\nSide $a = \\sqrt{4} = 2\\text{ units}$.\r\nVolume of Cube ($V$) $= a^3$.\r\n$V = (2)^3 = \\mathbf{8\\text{ cu. units}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{8\\text{ cu. units}}$"
+  },
+  {
+    "question": "If $p^2 - 5p - 1 = 0$, then the value of $p^2 + \\frac{1}{p^2}$ is:",
+    "options": [
+      "$27$",
+      "$25$",
+      "$23$",
+      "$21$"
+    ],
+    "correct": 1,
+    "ques_no": 31,
+    "chapter": "Algebra",
+    "solution": "Given equation: $p^2 - 5p - 1 = 0$.\r\nDivide the entire equation by $p$: $p - 5 - \\frac{1}{p} = 0$.\r\n$p - \\frac{1}{p} = 5$.\r\nWe use the identity: $p^2 + \\frac{1}{p^2} = (p - \\frac{1}{p})^2 + 2$.\r\n$p^2 + \\frac{1}{p^2} = (5)^2 + 2$.\r\n$p^2 + \\frac{1}{p^2} = 25 + 2 = \\mathbf{27}$.\r\n\\textbf{Ans. (a): } $\\mathbf{27}$"
+  },
+  {
+    "question": "Evaluate: $[7 + 7 \\times ( 7 + 7 \\div 7)] + 7 \\div 7$",
+    "options": [
+      "$10$",
+      "$64$",
+      "$5$",
+      "$63$"
+    ],
+    "correct": 1,
+    "ques_no": 32,
+    "chapter": "Simplification",
+    "solution": "We solve the expression using the **BODMAS/PEMDAS** rule, which dictates the order of operations: **B**rackets $\\to$ **O**rders (powers/roots) $\\to$ **D**ivision/\\textbf{M}ultiplication $\\to$ **A**ddition/\\textbf{S}ubtraction.\r\n\r\n**Expression:** $[7 + 7 \\times ( 7 + 7 \\div 7)] + 7 \\div 7$\r\n\r\n**Step 1: Solve the Innermost Bracket**\r\nInside the innermost bracket, perform the Division first:\r\n* $( 7 + \\mathbf{7 \\div 7}) = (7 + 1) = 8$\r\n\r\n**Step 2: Solve the Main Bracket**\r\nSubstitute the result back into the main bracket:\r\n* $[7 + 7 \\times \\mathbf{8}]$\r\n* Perform the Multiplication: $7 \\times 8 = 56$\r\n* Perform the Addition: $[7 + 56] = 63$\r\n\r\n**Step 3: Solve the Remaining Expression**\r\nSubstitute the result back into the original expression:\r\n* $\\mathbf{63} + 7 \\div 7$\r\n* Perform the Division: $7 \\div 7 = 1$\r\n* Perform the final Addition: $63 + 1 = \\mathbf{64}$\r\n\r\n\\textbf{Ans. (b): } $\\mathbf{64}$"
+  },
+  {
+    "question": "Simplify: $15 \\div 5 \\times 2 + [30 \\div 2 \\times 3 - (5 \\times 2 + 1)]$",
+    "options": [
+      "$32$",
+      "$36$",
+      "$30$",
+      "$40$"
+    ],
+    "correct": 3,
+    "ques_no": 33,
+    "chapter": "Simplification",
+    "solution": "We use the BODMAS/PEMDAS rule (Brackets, Orders, Division/Multiplication, Addition/Subtraction).\r\nStep 1: Solve the innermost bracket: $(5 \\times 2 + 1) = (10 + 1) = 11$.\r\nExpression $= 15 \\div 5 \\times 2 + [30 \\div 2 \\times 3 - 11]$.\r\nStep 2: Solve the second bracket (Division/Multiplication from left to right):\r\n$30 \\div 2 \\times 3 = 15 \\times 3 = 45$.\r\nBracket value: $[45 - 11] = 34$.\r\nExpression $= 15 \\div 5 \\times 2 + 34$.\r\nStep 3: Solve remaining Division/Multiplication from left to right:\r\n$15 \\div 5 \\times 2 = 3 \\times 2 = 6$.\r\nExpression $= 6 + 34$.\r\nStep 4: Solve Addition:\r\n$6 + 34 = \\mathbf{40}$."
+  },
+  {
+    "question": "What is the remainder when the product of the first $100$ whole numbers is divided by $7!$?",
+    "options": [
+      "$0$",
+      "$1$",
+      "$6$",
+      "$7$"
+    ],
+    "correct": 0,
+    "ques_no": 34,
+    "chapter": "Number System",
+    "solution": "The first $100$ whole numbers are $0, 1, 2, 3, 4, \\dots, 99$.\r\nThe product of the first $100$ whole numbers is $P = 0 \\times 1 \\times 2 \\times 3 \\times \\dots \\times 99$.\r\nSince one of the factors is $0$, the product is $P = 0$.\r\nWhen $0$ is divided by any non-zero number (like $7! = 5040$), the remainder is $0$.\r\nRemainder $= \\mathbf{0}$.\r\n\\textbf{Ans. (a): } $\\mathbf{0}$"
+  },
+  {
+    "question": "Vijay bought a fridge and a washing machine together for $\\text{Rs. }38,200$. He sold the fridge at a profit of $15\\%$ and the washing machine at a loss of $24\\%$. If both are sold at the same price, what is the cost price of the washing machine (in $\\text{Rs.}$)?",
+    "options": [
+      "$\\text{Rs. }24,000$",
+      "$\\text{Rs. }22,000$",
+      "$\\text{Rs. }23,000$",
+      "$\\text{Rs. }26,000$"
+    ],
+    "correct": 2,
+    "ques_no": 35,
+    "chapter": "Profit and Loss",
+    "solution": "Let $C_F$ and $C_W$ be the Cost Prices of the fridge and washing machine.\\r\\nTotal CP: $C_F + C_W = 38,200$.\r\nSelling Price is the same, so: $C_F \\times \\frac{100+15}{100} = C_W \\times \\frac{100-24}{100}$\r\n$115C_F = 76C_W$. $\\implies \\frac{C_F}{C_W} = \\frac{76}{115}$.\r\nTotal units $= 76 + 115 = 191$ units.\r\n$191 \\text{ units} = 38,200 \\text{ Rs.}$. $\\implies 1 \\text{ unit} = 200\\text{ Rs.}$.\r\nCP of Washing Machine $C_W = 115 \\times 200 = \\mathbf{23,000\\text{ Rs.}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{\\text{Rs. }23,000}$"
+  },
+  {
+    "question": "What is the value of $\\frac{0.8 \\times 0.8 \\times 0.8 + 0.5 \\times 0.5 \\times 0.5}{0.8 \\times 0.8 - 0.8 \\times 0.5 + 0.5 \\times 0.5}$?",
+    "options": [
+      "$1.3$",
+      "$0.3$",
+      "$1.2$",
+      "$0.9$"
+    ],
+    "correct": 0,
+    "ques_no": 36,
+    "chapter": "Simplification",
+    "solution": "The expression is in the form of $\\frac{a^3 + b^3}{a^2 - ab + b^2}$, where $a=0.8$ and $b=0.5$.\r\nUsing the identity $a^3 + b^3 = (a+b)(a^2 - ab + b^2)$.\r\nThe expression simplifies to $a + b$.\r\nValue $= 0.8 + 0.5 = \\mathbf{1.3}$.\r\n\\textbf{Ans. (a): } $\\mathbf{1.3}$"
+  },
+  {
+    "question": "Two tangents PA and PB are drawn to a circle with center O from an external point P. If $\\angle APB = 50^{\\circ}$, what is the measure of $\\angle AOB$ (in degrees)?",
+    "options": [
+      "$100^{\\circ}$",
+      "$120^{\\circ}$",
+      "$130^{\\circ}$",
+      "$140^{\\circ}$"
+    ],
+    "correct": 2,
+    "ques_no": 37,
+    "chapter": "Geometry",
+    "solution": "The quadrilateral OAPB is formed by two radii (OA and OB) and two tangents (PA and PB).\r\nThe radius is perpendicular to the tangent at the point of contact, so $\\angle OAP = 90^{\\circ}$ and $\\angle OBP = 90^{\\circ}$.\r\nThe sum of angles in a quadrilateral is $360^{\\circ}$.\r\n$\\angle AOB = 360^{\\circ} - (\\angle OAP + \\angle OBP + \\angle APB)$\r\n$\\angle AOB = 360^{\\circ} - (90^{\\circ} + 90^{\\circ} + 50^{\\circ}) = 360^{\\circ} - 230^{\\circ} = \\mathbf{130^{\\circ}}$.\r\n\\textbf{Ans. (c): } $\\mathbf{130^{\\circ}}$"
+  },
+  {
+    "question": "By selling an article for $\\text{Rs. }840$, a shopkeeper incurs a loss of $16\\%$. At what price (in $\\text{Rs.}$) should he sell the article to gain $18\\%$ profit?",
+    "options": [
+      "$\\text{Rs. }1250$",
+      "$\\text{Rs. }1180$",
+      "$\\text{Rs. }1218$",
+      "$\\text{Rs. }1050$"
+    ],
+    "correct": 2,
+    "ques_no": 38,
+    "chapter": "Profit and Loss",
+    "solution": "The Selling Price ($\text{SP}_1$) of $\\text{Rs. }840$ corresponds to $(100\\% - 16\\%) = 84\\%$ of the Cost Price ($\text{CP}$).\\r\\n$\text{CP} = \\frac{\\text{SP}_1}{100\\% - \\text{Loss }\\%} \\times 100\\% = \\frac{840}{84} \\times 100 = 10 \\times 100 = 1000\\text{ Rs.}$.\r\nTo gain $18\\%$ profit, the new SP ($\text{SP}_2$) must be $118\\%$ of the CP.\r\n$\text{SP}_2 = 1000 \\times \\frac{100 + 18}{100} = 1000 \\times \\frac{118}{100} = 10 \\times 118 = \\mathbf{1180\\text{ Rs.}}$.\r\n\\textbf{Ans. (b): } $\\mathbf{\\text{Rs. }1180}$"
+  },
+  {
+    "question": "Find the value of $P$ if the number $123P48$ is completely divisible by $3$ and $11$.",
+    "options": [
+      "$3$",
+      "$6$",
+      "$9$",
+      "$5$"
+    ],
+    "correct": 2,
+    "ques_no": 39,
+    "chapter": "Number System",
+    "solution": "The number is $123P48$.\r\n1. Divisibility by 3: The sum of digits must be divisible by 3.\r\n$1+2+3+P+4+8 = 18+P$. Since $18$ is divisible by 3, $P$ must be $0, 3, 6, \\text{ or } 9$.\r\n2. Divisibility by 11: The difference between the sum of digits at odd places and the sum of digits at even places must be $0$ or a multiple of $11$.\r\nSum of digits at odd places (from right): $8+P+2 = 10+P$.\r\nSum of digits at even places: $4+3+1 = 8$.\r\nDifference: $(10+P) - 8 = 2+P$.\r\nFor divisibility by 11, $2+P$ must be $0, 11, 22, \\dots$.\r\nSince $P$ is a single digit, $0 \\le P \\le 9$. The possible value for $2+P$ is $11$.\r\n$2+P = 11 \\implies P = 9$.\r\nCheck the common values: $P$ must be in both sets of conditions. $P=9$ satisfies divisibility by 3 and 11."
+  },
+  {
+    "question": "If $\\sqrt{4096} = 64$, then the value of $\\sqrt{40.96} + \\sqrt{0.4096} + \\sqrt{0.004096}$ is:",
+    "options": [
+      "$7.094$",
+      "$7.04$",
+      "$7.104$",
+      "$7.168$"
+    ],
+    "correct": 2,
+    "ques_no": 40,
+    "chapter": "Simplification",
+    "solution": "Given $\\sqrt{4096} = 64$.\r\nFor every two decimal places in the number under the square root, there is one decimal place in the result.\r\n1. $\\sqrt{40.96}$: $2$ decimal places $\\implies 1$ decimal place in result. $\\implies 6.4$.\r\n2. $\\sqrt{0.4096}$: $4$ decimal places $\\implies 2$ decimal places in result. $\\implies 0.64$.\r\n3. $\\sqrt{0.004096}$: $6$ decimal places $\\implies 3$ decimal places in result. $\\implies 0.064$.\r\nSum $= 6.4 + 0.64 + 0.064$.\r\nSum $= 7.04 + 0.064 = \\mathbf{7.104}$.\r\n\\textbf{Ans. (c): } $\\mathbf{7.104}$"
+  },
+  {
+    "question": "A shopkeeper allows $16\\%$ discount on every item. Even after giving the discount, he makes a profit of $8\\%$. If he gives $8\\%$ discount instead of $16\\%$ on an item marked for $\\text{Rs. }1800$, then what will be his profit percent (correct to two decimal places)?",
+    "options": [
+      "$19.50\\%$",
+      "$18.29\\%$",
+      "$17.50\\%$",
+      "$16.85\\%$"
+    ],
+    "correct": 1,
+    "ques_no": 41,
+    "chapter": "Profit and Loss",
+    "solution": "Using the relationship $\\frac{CP}{MP} = \\frac{100 - \\text{Discount }\\%}{100 + \\text{Profit }\\%}$.\\r\\n$\\text{Discount}_1 = 16\\%$, $\\text{Profit}_1 = 8\\%$.\r\n$\\frac{CP}{1800} = \\frac{100 - 16}{100 + 8} = \\frac{84}{108} = \\frac{7}{9}$.\r\n$\text{CP} = 1800 \\times \\frac{7}{9} = 200 \\times 7 = 1400\\text{ Rs.}$.\r\nNew Discount $\\text{Discount}_2 = 8\\%$.\r\nNew SP $= 1800 \\times \\frac{100 - 8}{100} = 1800 \\times \\frac{92}{100} = 18 \\times 92 = 1656\\text{ Rs.}$.\r\nNew Profit $\\% = \\frac{SP - CP}{CP} \\times 100 = \\frac{1656 - 1400}{1400} \\times 100 = \\frac{256}{1400} \\times 100$.\r\nProfit $\\% = \\frac{256}{14} \\approx 18.2857\\% \\implies \\mathbf{18.29\\%}$.\r\n\\textbf{Ans. (b): } $\\mathbf{18.29\\%}$"
+  },
+  {
+    "question": "The diagonals of a rhombus are $10\\text{ cm}$ and $24\\text{ cm}$. Find the perimeter of the rhombus (in $\\text{cm}$).",
+    "options": [
+      "$52\\text{ cm}$",
+      "$68\\text{ cm}$",
+      "$48\\text{ cm}$",
+      "$60\\text{ cm}$"
+    ],
+    "correct": 0,
+    "ques_no": 42,
+    "chapter": "Geometry",
+    "solution": "The diagonals of a rhombus bisect each other at a $90^{\\circ}$ angle.\r\n The lengths of the legs of the $4$ right triangles formed are $\\frac{10}{2} = 5\\text{ cm}$ and $\\frac{24}{2} = 12\\text{ cm}$.\r\nThe side ($a$) of the rhombus is the hypotenuse: $a = \\sqrt{5^2 + 12^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13\\text{ cm}$.\r\nPerimeter $= 4a = 4 \\times 13 = \\mathbf{52\\text{ cm}}$.\r\n\\textbf{Ans. (a): } $\\mathbf{52\\text{ cm}}$"
+  },
+  {
+    "question": "The length of a chord of a circle is $16\\text{ cm}$. If the distance of the chord from the center is $6\\text{ cm}$, find the radius of the circle (in $\\text{cm}$).",
+    "options": [
+      "$10\\text{ cm}$",
+      "$12\\text{ cm}$",
+      "$8\\text{ cm}$",
+      "$14\\text{ cm}$"
+    ],
+    "correct": 0,
+    "ques_no": 43,
+    "chapter": "Geometry",
+    "solution": "The perpendicular from the center of a circle to a chord bisects the chord. The half-length of the chord is $\\frac{16}{2} = 8\\text{ cm}$.\r\nThis forms a right-angled triangle with the radius ($r$) as the hypotenuse, and the distance from the center ($6\\text{ cm}$) and the half-chord ($8\\text{ cm}$) as the legs.\r\nBy Pythagoras theorem: $r^2 = 6^2 + 8^2 = 36 + 64 = 100$.\r\n$r = \\sqrt{100} = \\mathbf{10\\text{ cm}}$.\r\n\\textbf{Ans. (a): } $\\mathbf{10\\text{ cm}}$"
+  },
+  {
+    "question": "The angles of a triangle are in the ratio $2:3:4$. What is the measure of the largest angle (in degrees)?",
+    "options": [
+      "$60^{\\circ}$",
+      "$80^{\\circ}$",
+      "$100^{\\circ}$",
+      "$90^{\\circ}$"
+    ],
+    "correct": 1,
+    "ques_no": 44,
+    "chapter": "Geometry",
+    "solution": "The sum of the angles in a triangle is $180^{\\circ}$. Let the angles be $2x, 3x, \\text{ and } 4x$.\r\n$2x + 3x + 4x = 180^{\\circ}$. $\\implies 9x = 180^{\\circ}$. $\\implies x = 20^{\\circ}$.\r\nThe largest angle is $4x = 4 \\times 20^{\\circ} = \\mathbf{80^{\\circ}}$.\r\n\\textbf{Ans. (b): } $\\mathbf{80^{\\circ}}$"
+  },
+  {
+    "question": "Find the unit digit in the expression $7^{71} \\times 6^{63} \\times 3^{65}$.",
+    "options": [
+      "$2$",
+      "$4$",
+      "$6$",
+      "$8$"
+    ],
+    "correct": 1,
+    "ques_no": 45,
+    "chapter": "Number System",
+    "solution": "1. Unit digit of $7^{71}$: The cyclicity of $7$ is $4$ ($7, 9, 3, 1$).\r\nRemainder of $71 \\div 4$ is $3$. $\\implies$ Unit digit is the $3\\text{rd}$ in the cycle, which is $3$.\r\n2. Unit digit of $6^{63}$: The cyclicity of $6$ is $1$. The unit digit is always $6$.\r\n3. Unit digit of $3^{65}$: The cyclicity of $3$ is $4$ ($3, 9, 7, 1$).\r\nRemainder of $65 \\div 4$ is $1$. $\\implies$ Unit digit is the $1\\text{st}$ in the cycle, which is $3$.\r\nUnit digit of the total expression $= \\text{Unit digit of } (3 \\times 6 \\times 3)$.\r\nUnit digit of $(18 \\times 3) = \\text{Unit digit of } 54$, which is $\\mathbf{4}$."
+  }
+];
+
+        // State variables
+        let currentQuestion = 0;
+        let userAnswers = {};
+        let userName = '';
+        let examTimer;
+        let progressSaver; // Periodic save interval
+        let timeRemaining = TOTAL_EXAM_TIME; 
+        let examStarted = false;
+
+        // NEW: Tracks all questions the user has landed on/viewed
+        let questionsVisited = new Set();
+
+        // --- PROGRESS RECOVERY KEYS ---
+        const PROGRESS_KEY = 'quiz_in_progress';
+        const ANSWERS_KEY = 'quiz_answers';
+        const VISITED_KEY = 'quiz_visited';
+        // ---------------------------------
+
+        // --- GLOBAL STATE FOR TIMING ---
+        let questionTimings = {}; // { index: totalTimeInSeconds }
+        let lastQuestionStartTime = 0; // Timestamp in milliseconds (Date.now())
+        // -----------------------------------
+
+        /***********************
+         * JSONBin helper funcs
+         ***********************/
+        async function fetchResponsesFromBin() {
+            try {
+                const resp = await fetch(`${JSONBIN_BASE}/latest`, {
+                    method: 'GET',
+                    headers: { 'X-Master-Key': JSONBIN_MASTER_KEY, 'Accept': 'application/json' }
+                });
+
+                if (!resp.ok) throw new Error(`Fetch failed: ${resp.status}`);
+                const json = await resp.json();
+                const payload = json?.record?.data ?? json?.record ?? json?.data ?? json;
+
+                if (Array.isArray(payload)) return payload;
+                if (Array.isArray(payload.quizResponses)) return payload.quizResponses;
+                if (Array.isArray(payload.responses)) return payload.responses;
+                
+                return payload?.quizResponses || payload?.responses || [];
+            } catch (err) {
+                return JSON.parse(localStorage.getItem('quizResponses') || '[]');
+            }
+        }
+
+        async function writeResponsesToBin(responsesArray) {
+            try {
+                const body = { data: { quizResponses: responsesArray } };
+                const resp = await fetch(`${JSONBIN_BASE}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_MASTER_KEY },
+                    body: JSON.stringify(body)
+                });
+                if (!resp.ok) throw new Error('JSONBin write failed');
+
+                try { localStorage.setItem('quizResponses', JSON.stringify(responsesArray)); } catch (e) { console.warn('Could not write to localStorage as cache:', e); }
+                return true;
+            } catch (err) {
+                return false;
+            }
+        }
+
+        async function appendResponseRemote(newResponse) {
+            const current = await fetchResponsesFromBin();
+            current.push(newResponse);
+            return { ok: await writeResponsesToBin(current), current };
+        }
+
+        // -------------------------
+        // DATA PERSISTENCE & RECOVERY
+        // -------------------------
+
+        function saveProgress() {
+            const progress = {
+                currentQuestion: currentQuestion,
+                timeRemaining: timeRemaining,
+                userName: userName,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(ANSWERS_KEY, JSON.stringify(userAnswers));
+            localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(questionsVisited)));
+        }
+
+        function recoverProgress() {
+            const progressStr = localStorage.getItem(PROGRESS_KEY);
+            const answersStr = localStorage.getItem(ANSWERS_KEY);
+            const visitedStr = localStorage.getItem(VISITED_KEY);
+
+            if (!progressStr || !answersStr || !questions.length) return false;
+
+            const progress = JSON.parse(progressStr);
+            const answers = JSON.parse(answersStr);
+            const visited = JSON.parse(visitedStr || '[]');
+
+            if (progress.timeRemaining <= 0) { clearLocalProgress(); return false; }
+
+            if (confirm(`A previous exam session was found for ${progress.userName}, started at ${new Date(progress.timestamp).toLocaleTimeString()}. Do you want to continue?`)) {
+                currentQuestion = progress.currentQuestion;
+                timeRemaining = progress.timeRemaining;
+                userName = progress.userName;
+                userAnswers = answers;
+                questionsVisited = new Set(visited);
+
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('quizContainer').style.display = 'block';
+                document.getElementById('userForm').style.display = 'none';
+                document.getElementById('navigation').style.display = 'flex';
+                document.getElementById('questionsContainer').style.display = 'block';
+                document.getElementById('palettePanel').style.display = 'flex';
+
+                document.getElementById('userName').value = userName;
+
+                generateQuestions();
+                
+                for (let index in userAnswers) {
+                    const optIndex = userAnswers[index];
+                    const optionElement = document.querySelector(`#question-${index} .option:nth-child(${optIndex + 1})`);
+                    if (optionElement) {
+                        optionElement.classList.add('selected');
+                        const radio = optionElement.querySelector('input[type="radio"]');
+                        if (radio) radio.checked = true;
+                    }
+                }
+
+                showQuestion(currentQuestion);
+                examStarted = true;
+                startTimer();
+
+                return true;
+            } else {
+                clearLocalProgress();
+                return false;
+            }
+        }
+
+        function clearLocalProgress() {
+            localStorage.removeItem(PROGRESS_KEY);
+            localStorage.removeItem(ANSWERS_KEY);
+            localStorage.removeItem(VISITED_KEY);
+        }
+
+        // -------------------------
+        // UI & NAVIGATION
+        // -------------------------
+
+        function startTimer() {
+            if (examTimer) clearInterval(examTimer);
+            if (progressSaver) clearInterval(progressSaver);
+
+            // Set the start time for the current session/question
+            lastQuestionStartTime = Date.now(); 
+
+            examTimer = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= CRITICAL_TIME_THRESHOLD) { 
+                    document.getElementById('timerContainer').classList.add('timer-warning');
+                    document.getElementById('autoSubmitWarning').style.display = 'block';
+                }
+                if (timeRemaining <= 60) { 
+                    document.getElementById('timerContainer').classList.remove('timer-warning');
+                    document.getElementById('timerContainer').classList.add('timer-critical');
+                }
+
+                if (timeRemaining <= 0) {
+                    autoSubmitTest();
+                }
+            }, 1000);
+            
+            progressSaver = setInterval(saveProgress, SAVE_INTERVAL_SECONDS * 1000);
+        }
+
+        function stopTimer() {
+            if (examTimer) clearInterval(examTimer);
+            if (progressSaver) clearInterval(progressSaver);
+            examTimer = null;
+            progressSaver = null;
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            
+            const display = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timerDisplay').textContent = display;
+        }
+
+        function autoSubmitTest() {
+            stopTimer();
+            submitTest(true);
+        }
+        
+        // NEW HELPER: Records time spent on the previous question
+        function recordQuestionTime(prevIndex) {
+            if (prevIndex !== null && examStarted) {
+                // Calculate time spent on the previous question (in seconds)
+                const timeSpent = (Date.now() - lastQuestionStartTime) / 1000;
+                
+                // Add time to the total time for that question index
+                questionTimings[prevIndex] = (questionTimings[prevIndex] || 0) + timeSpent;
+            }
+            // Set the start time for the current/next active question
+            lastQuestionStartTime = Date.now();
+        }
+
+
+        // --- PIN GATEWAY FUNCTIONS ---
+        function startTest() {
+            document.getElementById('modalTitle').textContent = 'Enter Test PIN';
+            document.getElementById('testPinInput').value = '';
+            document.getElementById('pinError').style.display = 'none';
+            document.getElementById('pinSubmitBtn').onclick = checkTestPin;
+            document.getElementById('passwordModal').style.display = 'block';
+        }
+
+        function checkTestPin() {
+            const enteredPin = document.getElementById('testPinInput').value;
+            const pinError = document.getElementById('pinError');
+
+            if (enteredPin === TEST_PIN) {
+                closeModal('passwordModal');
+                
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('quizContainer').style.display = 'block';
+                
+                // Show the sign-in form only, other elements remain hidden
+                document.getElementById('questionsContainer').style.display = 'none';
+                document.getElementById('navigation').style.display = 'none';
+                document.getElementById('palettePanel').style.display = 'none';
+                document.getElementById('userForm').style.display = 'flex'; 
+
+            } else {
+                pinError.textContent = 'Incorrect 6-Digit PIN!';
+                pinError.style.display = 'block';
+            }
+        }
+        // --- END PIN GATEWAY FUNCTIONS ---
+
+        function togglePalette() {
+            const palette = document.getElementById('palettePanel');
+            palette.classList.toggle('visible'); 
+        }
+
+        function startQuiz() {
+            userName = document.getElementById('userName').value.trim();
+
+            if (!userName) {
+                alert('Please enter your name');
+                return;
+            }
+
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('navigation').style.display = 'flex';
+            document.getElementById('questionsContainer').style.display = 'block';
+            document.getElementById('palettePanel').style.display = 'flex'; 
+            
+            showQuestion(0);
+            
+            examStarted = true;
+            startTimer();
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function generateQuestions() {
+            const container = document.getElementById('questionsContainer');
+            const paletteGrid = document.getElementById('paletteGrid');
+            container.innerHTML = '';
+            paletteGrid.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                // 1. Generate Question UI
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.id = `question-${index}`;
+                
+                let optionsHtml = '';
+                q.options.forEach((option, optIndex) => {
+                    const isChecked = userAnswers[index] === optIndex ? 'checked' : '';
+                    const isSelected = userAnswers[index] === optIndex ? ' selected' : '';
+                    
+                    optionsHtml += `
+                        <li class="option${isSelected}" onclick="selectOption(${index}, ${optIndex})">
+                            <label>
+                                <input type="radio" name="question-${index}" value="${optIndex}" ${isChecked}>
+                                (${String.fromCharCode(65 + optIndex)}) ${option}
+                            </label>
+                        </li>
+                    `;
+                });
+
+                questionDiv.innerHTML = `
+                    <div class="question">
+                        <div class="question-header">Question ${index + 1}</div>
+                        <div class="question-text">${q.question}</div>
+                        <ul class="options">${optionsHtml}</ul>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+                
+                // 2. Generate Palette Item
+                const paletteItem = document.createElement('div');
+                paletteItem.className = `palette-item palette-default`;
+                paletteItem.textContent = index + 1;
+                paletteItem.onclick = () => showQuestion(index);
+                paletteGrid.appendChild(paletteItem);
+            });
+            
+            updatePalette();
+        }
+
+        function updatePalette() {
+            const paletteItems = document.querySelectorAll('#paletteGrid .palette-item');
+            
+            questions.forEach((q, index) => {
+                const item = paletteItems[index];
+                item.classList.remove('palette-answered', 'palette-unanswered', 'palette-current', 'palette-default');
+                
+                const isAnswered = userAnswers[index] !== undefined && userAnswers[index] !== null;
+                const isVisited = questionsVisited.has(index);
+                
+                if (index === currentQuestion) {
+                    item.classList.add('palette-current'); // Current: Yellow/Gold
+                } else if (isAnswered) {
+                    item.classList.add('palette-answered'); // Answered: Green
+                } else if (isVisited) {
+                    item.classList.add('palette-unanswered'); // Unanswered (Seen): Red
+                } else {
+                    item.classList.add('palette-default'); // Not Seen: White
+                }
+            });
+        }
+
+        function calculateScore(answers) {
+             let correct = 0;
+            let incorrect = 0;
+            let unattempted = 0;
+            let detailedResults = {};
+
+            for (let i = 0; i < questions.length; i++) {
+                const userAnswer = answers[i];
+                const correctAnswer = questions[i].correct;
+                
+                if (userAnswer === undefined || userAnswer === null) {
+                    unattempted++;
+                    detailedResults[i] = { status: 'unattempted', icon: '–', points: 0 };
+                } else if (userAnswer === correctAnswer) {
+                    correct++;
+                    detailedResults[i] = { status: 'correct', icon: '✅', points: 2 };
+                } else {
+                    incorrect++;
+                    detailedResults[i] = { status: 'incorrect', icon: '❌', points: -0.5 };
+                }
+            }
+
+            const totalScore = (correct * 2) + (incorrect * -0.5);
+            const percentage = ((correct * 2) / (questions.length * 2)) * 100;
+
+            return {
+                correct,
+                incorrect,
+                unattempted,
+                totalScore,
+                percentage: percentage.toFixed(2),
+                maxMarks: questions.length * 2,
+                detailedResults
+            };
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            const options = document.querySelectorAll(`#question-${questionIndex} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            options[optionIndex].classList.add('selected');
+
+            userAnswers[questionIndex] = optionIndex;
+            
+            updatePalette(); 
+            saveProgress();
+        }
+
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+
+            // CRITICAL FIX: Record time for the question being left BEFORE changing the index
+            recordQuestionTime(currentQuestion);
+
+            // Mark question as visited
+            questionsVisited.add(index);
+            
+            document.querySelectorAll('.question-container').forEach(q => {
+                q.classList.remove('active');
+            });
+            document.getElementById(`question-${index}`).classList.add('active');
+
+            currentQuestion = index; // Update index after recording time
+
+            document.getElementById('progress').textContent = `Question ${index + 1} of ${questions.length}`;
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (prevBtn) prevBtn.disabled = (index === 0);
+            
+            if (index === questions.length - 1) {
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (submitBtn) submitBtn.style.display = 'inline-block';
+            } else {
+                if (nextBtn) nextBtn.style.display = 'inline-block';
+                if (submitBtn) submitBtn.style.display = 'none';
+            }
+            
+            updatePalette(); 
+            MathJax.typeset(); 
+            saveProgress(); // Save after state change
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1);
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1);
+        }
+
+        async function submitTest(isAutoSubmit = false) {
+            stopTimer(); 
+            
+            const confirmMessage = isAutoSubmit ? 
+                'Your test has been auto-submitted due to time expiry.' :
+                'Are you sure you want to submit your test? You cannot change your answers after submission.';
+                
+            if (!isAutoSubmit && !confirm(confirmMessage)) {
+                if (examStarted) startTimer();
+                return;
+            }
+
+            // CRITICAL FIX: Record time for the final active question
+            if (examStarted) {
+                recordQuestionTime(currentQuestion);
+            }
+
+            try {
+                const scoreData = calculateScore(userAnswers);
+                
+                const response = {
+                    name: userName,
+                    answers: userAnswers,
+                    scoreData: scoreData,
+                    timestamp: new Date().toISOString(),
+                    submittedAt: new Date().toLocaleString(),
+                    isAutoSubmitted: isAutoSubmit,
+                    timeSpent: TOTAL_EXAM_TIME - timeRemaining,
+                    questionTimings: questionTimings // NEW: Include per-question data
+                };
+
+                const { ok, current } = await appendResponseRemote(response);
+
+                if (ok) {
+                    console.log('Saved response to JSONBin successfully.');
+                } else {
+                    console.warn('Failed to save to JSONBin; final fallback to localStorage cache.');
+                }
+                
+                clearLocalProgress();
+
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error in final submission process:', error);
+                clearLocalProgress();
+                
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                alert('Submission complete, though there was a server error.');
+            }
+        }
+        
+        // NEW HELPER: Records time spent on the previous question
+        function recordQuestionTime(prevIndex) {
+            if (prevIndex !== null && examStarted && questionsVisited.has(prevIndex)) {
+                // Calculate time spent on the previous question (in seconds)
+                const timeSpent = (Date.now() - lastQuestionStartTime) / 1000;
+                
+                // Add time to the total time for that question index
+                questionTimings[prevIndex] = (questionTimings[prevIndex] || 0) + timeSpent;
+            }
+            // Set the start time for the current/next active question
+            lastQuestionStartTime = Date.now();
+        }
+
+        // -------------------------
+        // ADMIN AND DOWNLOAD FUNCTIONS
+        // -------------------------
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'block';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('passwordError').style.display = 'none';
+        }
+
+        function checkAdminPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'AryanM@123M') {
+                closeModal('adminModal');
+                showAdminPanel();
+            } else {
+                document.getElementById('passwordError').style.display = 'block';
+            }
+        }
+
+        async function showAdminPanel() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            
+            await displayResponses();
+        }
+
+        async function displayResponses() {
+            const container = document.getElementById('responsesContainer');
+            if (typeof MathJax !== 'undefined') {
+                await MathJax.startup.promise;
+            }
+            const responses = await fetchResponsesFromBin();
+
+            if (!responses || responses.length === 0) {
+                container.innerHTML = '<p>No responses yet.</p>';
+                return;
+            }
+
+            let allResponsesHtml = '';
+
+            responses.forEach((response, responseIndex) => {
+                const scoreData = response.scoreData || calculateScore(response.answers || {});
+                const timings = response.questionTimings || {};
+                const totalAttempted = scoreData.correct + scoreData.incorrect;
+                
+                const timeSpentMinutes = Math.floor((response.timeSpent || 0) / 60);
+                const timeSpentSeconds = (response.timeSpent || 0) % 60;
+                const timeSpentDisplay = `${timeSpentMinutes}m ${timeSpentSeconds}s`;
+
+                // --- SUMMARY PANEL HTML ---
+                let summaryHtml = `
+                    <div class="report-summary">
+                        <h3 class="test-title">SSC CHSL - Mathematics Practice Test 2 Report</h3>
+                        <div class="summary-details">
+                            <p><strong>Name:</strong> ${response.name || '—'}</p>
+                            <p><strong>Date & Time:</strong> ${response.submittedAt}</p>
+                            <p><strong>Time Taken:</strong> ${timeSpentDisplay}</p>
+                            <p><strong>Score:</strong> ${scoreData.totalScore.toFixed(2)} / ${scoreData.maxMarks}</p>
+                            <p><strong>Percentage:</strong> ${scoreData.percentage}%</p>
+                            <p><strong>Correct:</strong> ${scoreData.correct}</p>
+                            <p><strong>Incorrect:</strong> ${scoreData.incorrect}</p>
+                            <p><strong>Unattempted:</strong> ${scoreData.unattempted}</p>
+                            <p><strong>Attempted:</strong> ${totalAttempted}</p>
+                        </div>
+                    </div>`;
+                // --- END SUMMARY PANEL HTML ---
+
+                // --- TOOLBAR (Updated with Solution and Chapter Checkbox) ---
+                let toolbarHtml = `
+                    <div class="toolbar" id="toolbar-${responseIndex}">
+                        <label><input type="checkbox" data-col="q-num" checked> Q#</label>
+                        <label><input type="checkbox" data-col="q-text" checked> Question</label>
+                        <label><input type="checkbox" data-col="q-options" checked> Options</label>
+                        <label><input type="checkbox" data-col="q-selection-letter" checked> Your Option</label>
+                        <label><input type="checkbox" data-col="q-correct-letter" checked> Correct Option</label>
+                        <label><input type="checkbox" data-col="q-result" checked> Result</label>
+                        <label><input type="checkbox" data-col="q-time" checked> Time</label>
+                        <label><input type="checkbox" data-col="q-solution" checked> Solution</label>
+                        <label><input type="checkbox" data-col="q-chapter" checked> Chapter</label> </div>
+                `;
+                
+                let tableHtml = '<div class="response-view"><div style="overflow-x: auto;"><table class="response-table" style="width: 100%; font-size: 12px;"><thead><tr>';
+                
+                // NEW COLUMN HEADERS AND ORDER & WIDTHS (Updated with Chapter Header)
+                tableHtml += '<th class="col-q-num" style="width: 4%;">Q#</th>';
+                tableHtml += '<th class="col-q-chapter" style="width: 10%;">Chapter</th>'; // NEW: Chapter Column - Header
+                tableHtml += '<th class="col-q-text" style="width: 20%;">Question</th>';
+                tableHtml += '<th class="col-q-options" style="width: 10%;">Options (with Text)</th>';
+                tableHtml += '<th class="col-q-selection-letter" style="width: 5%;">Your Opt.</th>';
+                tableHtml += '<th class="col-q-correct-letter" style="width: 5%;">Correct Opt.</th>';
+                tableHtml += '<th class="col-q-result" style="width: 7%;">Result</th>';
+                tableHtml += '<th class="col-q-time" style="width: 5%;">Time (s)</th>';
+                tableHtml += '<th class="col-q-solution" style="width: 29%;">Solution</th></tr></thead><tbody>'; 
+                // --- END TOOLBAR & TABLE SETUP ---
+
+                for (let i = 0; i < questions.length; i++) {
+                    const questionData = questions[i]; // Get question data
+                    const userAnswer = (response.answers || {})[i];
+                    const correctAnswer = questionData.correct;
+                    const result = scoreData.detailedResults[i];
+
+                    const fullQuestionText = questionData.question;
+                    const resultIcon = result?.icon || '–';
+                    const points = result?.points || 0;
+                    const timePerQ = (timings[i] || 0).toFixed(1);
+                    const solutionText = questionData.solution || 'N/A'; // Get solution text
+                    const chapterName = questionData.chapter || 'N/A'; // NEW: Chapter Column - Get Chapter Name
+
+                    const correctLetter = String.fromCharCode(65 + correctAnswer);
+                    let userAnswerLetter = '—';
+
+                    let allOptionsHtml = '<ul style="list-style: none; padding: 0; margin: 0;">';
+                    questionData.options.forEach((optionText, optIndex) => {
+                        const optionLetter = String.fromCharCode(65 + optIndex);
+                        const isUserSelection = optIndex === userAnswer;
+                        
+                        let optionClass = 'font-weight: normal;';
+                        let prefix = ''; 
+                        
+                        
+                        
+                        if (isUserSelection) {
+                            userAnswerLetter = `${optionLetter}`; 
+                            
+                        }
+                        
+                        allOptionsHtml += `<li style="${optionClass} font-size: 11px; margin-bottom: 2px; line-height: 1.2;">${prefix}${optionLetter}) ${optionText}</li>`;
+                    });
+                    allOptionsHtml += '</ul>';
+
+                    tableHtml += '<tr>';
+                    // NEW COLUMN DATA AND ORDER
+                    tableHtml += `<td class="col-q-num" style="font-size: 13px; font-weight: 170;">${i + 1}</td>`;
+                    tableHtml += `<td class="col-q-chapter" style="font-size: 13px; font-weight: 150;">${chapterName}</td>`; // NEW: Chapter Column - Data
+                    tableHtml += `<td class="col-q-text math-question" style="font-size: 15px; font-weight: 150;">${fullQuestionText}</td>`;
+                    tableHtml += `<td class="col-q-options" style="font-size: 17px; font-weight: 150;">${allOptionsHtml}</td>`;
+                    
+                    // New column: Your Option (only letter)
+                    tableHtml += `<td class="col-q-selection-letter" style="text-align: center; font-weight: bold; color: ${userAnswer === correctAnswer ? '#28a745' : userAnswer !== undefined ? '#e74c3c' : '#999'};">${userAnswerLetter}</td>`;
+                    
+                    // New column: Correct Option (only letter)
+                    tableHtml += `<td class="col-q-correct-letter" style="text-align: center; font-weight: bold; color: #28a745;">${correctLetter}</td>`;
+                    
+                    tableHtml += `<td class="col-q-result" style="font-weight: bold; font-size: 11px; text-align: center; color: ${points > 0 ? '#27ae60' : points < 0 ? '#e74c3c' : '#95a5a6'};">${resultIcon}<br>(${points > 0 ? '+' : ''}${points})</td>`;
+                    tableHtml += `<td class="col-q-time">${timePerQ}</td>`;
+                    tableHtml += `<td class="col-q-solution math-question" style="font-size: 14px;">${solutionText.replace(/\r\n/g, '<br>')}</td>`; // Added Solution Data
+                    tableHtml += '</tr>';
+                }
+                
+                tableHtml += '</tbody></table></div></div>';
+                
+                allResponsesHtml += `<div class="response-report" id="response-report-${responseIndex}">` + summaryHtml + toolbarHtml + tableHtml + `</div>`;
+            });
+
+            container.innerHTML = allResponsesHtml;
+            
+            // Attach event listeners for the toolbars
+            document.querySelectorAll('.toolbar').forEach(toolbar => {
+                toolbar.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', toggleColumn);
+                });
+            });
+
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // New function to handle column visibility toggling
+        function toggleColumn(event) {
+            const checkbox = event.target;
+            const colClass = `col-${checkbox.getAttribute('data-col')}`;
+            
+            const report = checkbox.closest('.response-report');
+            if (!report) return;
+
+            const elementsToToggle = report.querySelectorAll(`.${colClass}`);
+            
+            elementsToToggle.forEach(el => {
+                if (checkbox.checked) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+
+
+        // New function to trigger native browser print (kept simple)
+        function printReport() {
+            // This relies on the @media print CSS rules to hide all buttons and controls.
+            window.print();
+        }
+        
+        // --- DOWNLOAD UTILITIES (Kept from previous functional code) ---
+        function cleanMathText(text) {
+            if (typeof text !== 'string') return String(text);
+            let cleaned = text;
+
+            // 1. Remove delimiters and environment commands
+            cleaned = cleaned.replace(/\$/g, '');
+            cleaned = cleaned.replace(/\\left|\\right/g, ''); 
+            cleaned = cleaned.replace(/\\cdot/g, '*');
+            cleaned = cleaned.replace(/\\quad|\\qquad/g, ' '); 
+
+            // 2. Simplify fractions and roots
+            cleaned = cleaned.replace(/\\frac{(.*?)}{(.*?)}/g, '($1/$2)'); 
+            cleaned = cleaned.replace(/\\sqrt{(.*?)}/g, 'sqrt($1)'); 
+            cleaned = cleaned.replace(/(\\w+)\^\{(.*?)\}/g, '$1^($2)'); // x^{2} -> x^(2)
+            cleaned = cleaned.replace(/(\w+)\^([a-zA-Z0-9])/g, '$1^$2'); // x^2 -> x^2
+
+            // 3. Handle Greek letters and functions (e.g., \sin, \theta)
+            cleaned = cleaned.replace(/\\cos/g, 'cos');
+            cleaned = cleaned.replace(/\\sin/g, 'sin');
+            cleaned = cleaned.replace(/\\tan/g, 'tan');
+            cleaned = cleaned.replace(/\\cot/g, 'cot');
+            cleaned = cleaned.replace(/\\sec/g, 'sec');
+            cleaned = cleaned.replace(/\\csc/g, 'csc');
+            cleaned = cleaned.replace(/\\theta/g, 'θ');
+            cleaned = cleaned.replace(/\\alpha/g, 'α');
+            cleaned = cleaned.replace(/\\beta/g, 'β');
+
+            // 4. Handle operators and units
+            cleaned = cleaned.replace(/\\pm/g, '+/-');
+            cleaned = cleaned.replace(/\\text{(.*?)}/g, '$1'); // \text{cm} -> cm
+            cleaned = cleaned.replace(/\\circ/g, ' deg'); // \circ -> deg
+            cleaned = cleaned.replace(/\\triangle/g, '∆'); 
+            cleaned = cleaned.replace(/\\ge/g, '>=');
+            cleaned = cleaned.replace(/\\le/g, '<=');
+            cleaned = cleaned.replace(/\\equiv/g, '≡');
+            cleaned = cleaned.replace(/\\ne/g, '≠');
+            
+            // 5. Clean up any remaining backslashes that don't represent a known command
+            cleaned = cleaned.replace(/\\/g, ''); 
+
+            return cleaned.trim();
+        }
+
+        function escapeForCSV(text) {
+            if (text === null || text === undefined) return '';
+            const str = String(text).replace(/"/g, '""').replace(/\r\n|\n|\r/g, ' '); // Replace newlines for CSV
+            return `"${str}"`;
+        }
+
+        function triggerDownload(data, filename) {
+            const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            
+            if (link.download !== undefined) { 
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('Your browser does not support direct downloading. Please copy and paste the data.');
+            }
+        }
+
+        /** DOWNLOAD FINAL RESULTS (CSV) - Per Question Row (Updated with Chapter Column) */
+        async function downloadResultsCSV() {
+            const responses = await fetchResponsesFromBin();
+            
+            if (!responses || responses.length === 0) {
+                alert('No results to download');
+                return;
+            }
+
+            const questionHeaders = ["User Status", "Q#", "Chapter", "Result", "Time (s)", "Points", "Question Text", "User Answer", "Correct Answer", "Solution"]; // NEW: Chapter Column - Header in CSV
+            let csvContent = questionHeaders.map(escapeForCSV).join(",") + "\n";
+
+            responses.forEach(response => {
+                let scoreData = response.scoreData || calculateScore(response.answers || {});
+                const timeSpentMinutes = ((response.timeSpent || 0) / 60).toFixed(2);
+                const timings = response.questionTimings || {}; 
+
+                const userHeader = [
+                    `USER: ${response.name}`, 
+                    `SCORE: ${scoreData.totalScore.toFixed(2)}/${scoreData.maxMarks}`,
+                    `PERCENTAGE: ${scoreData.percentage}%`, 
+                    `CORRECT: ${scoreData.correct}`, 
+                    `INCORRECT: ${scoreData.incorrect}`, 
+                    `UNATTEMPTED: ${scoreData.unattempted}`,
+                    `TIME TAKEN: ${timeSpentMinutes} min`, 
+                    `SUBMITTED: ${response.submittedAt}`, 
+                    `AUTO-SUBMIT: ${response.isAutoSubmitted ? 'Yes' : 'No'}`
+                ];
+                csvContent += userHeader.map(escapeForCSV).join(",") + "\n";
+
+                for (let i = 0; i < questions.length; i++) {
+                    const question = questions[i];
+                    const userAnswerIndex = (response.answers || {})[i];
+                    const correctAnswerIndex = question.correct;
+                    const result = scoreData.detailedResults[i];
+
+                    const userStatus = result?.status.toUpperCase() || 'UNATTEMPTED';
+                    const timePerQ = (timings[i] || 0).toFixed(1); 
+                    const chapterName = question.chapter || 'N/A'; // NEW: Chapter Column - Get Chapter Name
+
+                    let userAnswerText = 'Not Answered';
+                    if (userAnswerIndex !== undefined && userAnswerIndex !== null) {
+                        const optionLetter = String.fromCharCode(65 + userAnswerIndex);
+                        userAnswerText = `${optionLetter}) ${cleanMathText(question.options[userAnswerIndex])}`;
+                    }
+
+                    const correctLetter = String.fromCharCode(65 + correctAnswerIndex);
+                    const correctAnswerText = `${correctLetter}) ${cleanMathText(question.options[correctAnswerIndex])}`;
+                    const solutionText = cleanMathText(question.solution || 'N/A'); 
+
+                    const questionRow = [
+                        userStatus,
+                        i + 1,
+                        chapterName, // NEW: Chapter Column - Data in CSV
+                        userStatus === 'CORRECT' ? 'C' : userStatus === 'INCORRECT' ? 'I' : 'U',
+                        timePerQ, 
+                        result?.points || 0,
+                        cleanMathText(question.question), 
+                        userAnswerText,
+                        correctAnswerText,
+                        solutionText 
+                    ];
+                    
+                    csvContent += questionRow.map(escapeForCSV).join(",") + "\n";
+                }
+            });
+
+            triggerDownload(csvContent, `ssc_chsl_final_results_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+
+        /** DOWNLOAD RAW DATA (CSV) - Per Question Row (Updated with Chapter Column) */
+        async function downloadRawDataCSV() {
+            const responses = await fetchResponsesFromBin();
+            
+            if (!responses || responses.length === 0) {
+                alert('No raw data to download');
+                return;
+            }
+            
+            const rawHeaders = ["User Name", "Q#", "Chapter", "Question Text", "All Options", "User Selection"]; // NEW: Chapter Column - Header in Raw CSV
+            let csvContent = rawHeaders.map(escapeForCSV).join(",") + "\n";
+            
+            responses.forEach(response => {
+                const userNameHeader = [`USER: ${response.name}`]; 
+                csvContent += userNameHeader.map(escapeForCSV).join(",") + "\n";
+                
+                for (let i = 0; i < questions.length; i++) {
+                    const question = questions[i];
+                    const userAnswerIndex = (response.answers || {})[i];
+                    const chapterName = question.chapter || 'N/A'; // NEW: Chapter Column - Get Chapter Name
+                    
+                    const allOptions = question.options.map((opt, idx) => 
+                        `${String.fromCharCode(65 + idx)}) ${cleanMathText(opt)}`
+                    ).join(' | ');
+                    
+                    let userAnswerText = 'Not Answered';
+                    if (userAnswerIndex !== undefined && userAnswerIndex !== null) {
+                        const optionLetter = String.fromCharCode(65 + userAnswerIndex);
+                        const optionText = cleanMathText(question.options[userAnswerIndex]);
+                        userAnswerText = `${optionLetter}) ${optionText}`;
+                    }
+                    
+                    const questionRow = [
+                        response.name,
+                        i + 1,
+                        chapterName, // NEW: Chapter Column - Data in Raw CSV
+                        cleanMathText(question.question),
+                        allOptions,
+                        userAnswerText
+                    ];
+                    
+                    csvContent += questionRow.map(escapeForCSV).join(",") + "\n";
+                }
+            });
+
+            triggerDownload(csvContent, `ssc_chsl_raw_data_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+
+        async function clearAllResponses() {
+            if (!confirm('Are you sure you want to delete all user responses? This cannot be undone.')) return;
+
+            localStorage.removeItem('quizResponses');
+
+            const ok = await writeResponsesToBin([]);
+
+            if (ok) {
+                await displayResponses();
+                alert('All responses have been cleared from the server and local cache.');
+            } else {
+                alert('Failed to clear responses on server. Local responses cleared only.');
+                await displayResponses();
+            }
+        }
+
+        function goHome() {
+            stopTimer(); 
+            clearLocalProgress();
+            
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            currentQuestion = 0;
+            timeRemaining = TOTAL_EXAM_TIME; 
+            examStarted = false;
+            updateTimerDisplay();
+            document.getElementById('userName').value = '';
+            document.getElementById('userForm').style.display = 'block';
+            document.getElementById('navigation').style.display = 'none';
+            document.getElementById('autoSubmitWarning').style.display = 'none';
+            document.getElementById('timerContainer').classList.remove('timer-warning', 'timer-critical');
+        }
+
+        // -------------------------
+        // INITIALIZATION & EVENT LISTENERS
+        // -------------------------
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const recovered = recoverProgress();
+
+            if (!recovered) {
+                document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') checkAdminPassword();
+                });
+
+                document.getElementById('testPinInput').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') checkTestPin();
+                });
+            }
+            
+            updateTimerDisplay();
+            
+            if (!recovered) {
+                generateQuestions();
+            }
+        });
+
+        window.addEventListener('beforeunload', function (e) {
+            if (examStarted && timeRemaining > 0) {
+                saveProgress(); 
+
+                if (timeRemaining <= 300) { 
+                    autoSubmitTest(); 
+                }
+                
+                const message = 'Your exam progress has been saved. You can continue later.';
+                e.preventDefault();
+                e.returnValue = message;
+                return message;
+            }
+        });
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('adminModal');
+            if (event.target === modal) closeModal('adminModal');
+            
+            const pinModal = document.getElementById('passwordModal');
+            if (event.target === pinModal) closeModal('passwordModal');
+        }
+
+        document.addEventListener('contextmenu', function(e) { if (examStarted) e.preventDefault(); });
+        document.addEventListener('keydown', function(e) { 
+            if (examStarted) {
+                if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || e.key === 'F12') {
+                    e.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
